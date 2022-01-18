@@ -24,6 +24,9 @@ const RedirectScreen = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const expires = new Date();
+    expires.setFullYear(expires.getFullYear() + 1); // add 1 year
+
     async function redirectUser(successRedirectionUrl, failureRedirectionUrl) {
       const savedToken = cookies.load(StringConstants.COOKIE_TOKEN);
       const savedRefreshToken = cookies.load(
@@ -41,12 +44,14 @@ const RedirectScreen = (props) => {
             ).unwrap();
             cookies.save(StringConstants.COOKIE_TOKEN, response.data.token, {
               path: RouteConstants.LOGIN,
+              expires,
             });
             cookies.save(
               StringConstants.COOKIE_REFRESH_TOKEN,
               response.data.refreshToken,
               {
                 path: RouteConstants.LOGIN,
+                expires,
               }
             );
             navigate(successRedirectionUrl, { replace: true });
@@ -115,9 +120,11 @@ const RedirectScreen = (props) => {
       if (!isEmpty(token) && !isEmpty(refreshToken)) {
         cookies.save(StringConstants.COOKIE_TOKEN, token, {
           path: RouteConstants.LOGIN,
+          expires,
         });
         cookies.save(StringConstants.COOKIE_REFRESH_TOKEN, refreshToken, {
           path: RouteConstants.LOGIN,
+          expires,
         });
 
         redirectUser(RouteConstants.OVERVIEW, RouteConstants.LOGIN);
