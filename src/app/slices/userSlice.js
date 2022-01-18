@@ -155,10 +155,7 @@ export const userSlice = createSlice({
     builder
       .addCase(logout.fulfilled, resetUser)
       .addCase(getUserFromToken.fulfilled, setUser)
-      .addCase(refreshTokens.fulfilled, (state, action) => {
-        state.token = action.payload.data.token;
-        state.refreshToken = action.payload.data.refreshToken;
-      })
+      .addCase(refreshTokens.fulfilled, setUser)
       .addCase(deleteExpense.fulfilled, (state, action) => {
         state.expenses.splice(
           state.expenses.findIndex(

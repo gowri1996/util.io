@@ -1,8 +1,3 @@
-import {
-  isAuthenticatedUser,
-  isRefreshTokenValid,
-} from '../../utils/AuthUtils';
-
 import bcrypt from 'bcryptjs';
 import isEmpty from 'lodash.isempty';
 import jwt from 'jsonwebtoken';
@@ -17,6 +12,18 @@ const generateHashPassword = (passwordPlainText) => {
 
 const checkPassword = (passwordPlainText, hashedPassword) => {
   return bcrypt.compareSync(passwordPlainText, hashedPassword);
+};
+
+const isTokenValid = (token) => {
+  try {
+    if (isEmpty(token)) return false;
+
+    const decoded = jwt.decode(token);
+    var currentTime = Date.now() / 1000;
+    return decoded.exp > currentTime;
+  } catch (err) {
+    return false;
+  }
 };
 
 const registerUserService = (request) => {
@@ -153,7 +160,7 @@ const getUserFullDetails = (token) => {
           return;
         }
 
-        if (!isAuthenticatedUser()) {
+        if (!isTokenValid(token)) {
           reject({ message: 'Token Expired', status: 401 });
           return;
         }
@@ -198,7 +205,7 @@ const refreshTokens = (refreshToken) => {
           return;
         }
 
-        if (!isRefreshTokenValid()) {
+        if (!isTokenValid(refreshToken)) {
           reject({ message: 'Token Expired' });
           return;
         }
@@ -221,10 +228,19 @@ const refreshTokens = (refreshToken) => {
         user.refreshToken = newRefreshToken;
 
         localStorage.setItem('users', JSON.stringify(localUsers));
+        const data = {
+          _id: user._id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          expenses: user.expenses,
+          token: user.token,
+          refreshToken: user.refreshToken,
+        };
         resolve({
           status: 200,
           message: 'Logged in successfully',
-          data: { token: newToken, refreshToken: newRefreshToken },
+          data,
         });
       } catch (err) {
         reject(err);
@@ -292,7 +308,7 @@ const createExpense = (request) => {
           return;
         }
 
-        if (!isAuthenticatedUser()) {
+        if (!isTokenValid(token)) {
           reject({ message: 'Token Expired', status: 401 });
           return;
         }
@@ -336,7 +352,7 @@ const deleteExpense = (request) => {
           return;
         }
 
-        if (!isAuthenticatedUser()) {
+        if (!isTokenValid(token)) {
           reject({ message: 'Token Expired', status: 401 });
           return;
         }
@@ -382,7 +398,7 @@ const updateExpense = (request) => {
           return;
         }
 
-        if (!isAuthenticatedUser()) {
+        if (!isTokenValid(token)) {
           reject({ message: 'Token Expired', status: 401 });
           return;
         }

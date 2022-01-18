@@ -15,7 +15,6 @@ import Card from '../components/card/Card';
 import { Helmet } from 'react-helmet';
 import RouteConstants from '../constants/RouteConstants';
 import { register } from '../app/slices/userSlice';
-import unsecureComponent from '../components/UnsecureComponent';
 import { useDispatch } from 'react-redux';
 
 const RegisterScreen = (props) => {
@@ -162,4 +161,4 @@ const RegisterScreen = (props) => {
   );
 };
 
-export default unsecureComponent(RegisterScreen);
+export default RegisterScreen;

@@ -24,59 +24,86 @@ const RedirectScreen = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const redirectUser = async (redirectUrl) => {
-      const user = getUserDataFromCookie();
-      if (!isEmpty(user)) {
-        try {
-          const token = cookies.load(StringConstants.COOKIE_TOKEN);
-          await dispatch(getUserFromToken(token)).unwrap();
-
-          if (redirectUrl) {
-            navigate(redirectUrl, { redirect: true });
-            return;
-          }
-          navigate(RouteConstants.OVERVIEW, { redirect: true });
-        } catch (error) {
-          console.log(error);
-          if (error.status === 401) {
-            let refreshToken = cookies.load(
-              StringConstants.COOKIE_REFRESH_TOKEN
-            );
-            try {
-              const response = await dispatch(
-                refreshTokens(refreshToken)
-              ).unwrap();
-              cookies.save(StringConstants.COOKIE_TOKEN, response.data.token, {
+    async function redirectUser(successRedirectionUrl, failureRedirectionUrl) {
+      const savedToken = cookies.load(StringConstants.COOKIE_TOKEN);
+      const savedRefreshToken = cookies.load(
+        StringConstants.COOKIE_REFRESH_TOKEN
+      );
+      try {
+        await dispatch(getUserFromToken(savedToken)).unwrap();
+        navigate(successRedirectionUrl, { replace: true });
+      } catch (error) {
+        console.log(error);
+        if (error.status === 401) {
+          try {
+            const response = await dispatch(
+              refreshTokens(savedRefreshToken)
+            ).unwrap();
+            cookies.save(StringConstants.COOKIE_TOKEN, response.data.token, {
+              path: RouteConstants.LOGIN,
+            });
+            cookies.save(
+              StringConstants.COOKIE_REFRESH_TOKEN,
+              response.data.refreshToken,
+              {
                 path: RouteConstants.LOGIN,
-              });
-              cookies.save(
-                StringConstants.COOKIE_REFRESH_TOKEN,
-                response.data.refreshToken,
-                {
-                  path: RouteConstants.LOGIN,
-                }
-              );
-              if (redirectUrl) {
-                navigate(redirectUrl, { redirect: true });
-                return;
               }
-              navigate(RouteConstants.OVERVIEW, { redirect: true });
-            } catch (error) {
-              console.log(error);
-              deleteToken();
-              navigate(RouteConstants.LOGIN, { redirect: true });
-            }
-          } else {
+            );
+            navigate(successRedirectionUrl, { replace: true });
+          } catch (error) {
+            console.log(error);
             deleteToken();
-            navigate(RouteConstants.LOGIN, { redirect: true });
+            navigate(failureRedirectionUrl, { replace: true });
           }
+        } else {
+          deleteToken();
+          navigate(failureRedirectionUrl, { replace: true });
         }
-      } else {
-        navigate(RouteConstants.LOGIN, { redirect: true });
       }
-    };
+    }
 
-    if (location.search) {
+    const securityParam = getParamsFromUrl(
+      location.search,
+      StringConstants.SECURE_KEYWORD
+    );
+    const redirect = getParamsFromUrl(
+      location.search,
+      StringConstants.REDIRECT_KEYWORD
+    );
+    const otherParams = getAllParamsAsStringFromUrl(location.search, [
+      StringConstants.REDIRECT_KEYWORD,
+      StringConstants.SECURE_KEYWORD,
+    ]);
+    const redirectUrl = redirect ? redirect + otherParams : '';
+
+    if (securityParam === StringConstants.UN_SECURE_VALUE) {
+      // Unsecure Component
+      if (isAuthenticatedUser()) {
+        redirectUser(
+          RouteConstants.OVERVIEW,
+          redirectUrl ? redirectUrl : RouteConstants.LOGIN
+        );
+      } else {
+        if (!isEmpty(getUserDataFromCookie())) {
+          redirectUser(
+            RouteConstants.OVERVIEW,
+            redirectUrl ? redirectUrl : RouteConstants.LOGIN
+          );
+        } else {
+          deleteToken();
+          navigate(redirectUrl ? redirectUrl : RouteConstants.LOGIN, {
+            replace: true,
+          });
+        }
+      }
+    } else if (securityParam === StringConstants.SECURE_VALUE) {
+      // Secure Component
+      redirectUser(
+        redirectUrl ? redirectUrl : RouteConstants.OVERVIEW,
+        RouteConstants.LOGIN
+      );
+    } else {
+      // After login step
       const token = getParamsFromUrl(
         location.search,
         StringConstants.COOKIE_TOKEN
@@ -85,11 +112,6 @@ const RedirectScreen = (props) => {
         location.search,
         StringConstants.COOKIE_REFRESH_TOKEN
       );
-
-      const redirect = getParamsFromUrl(
-        location.search,
-        RouteConstants.REDIRECT_KEYWORD
-      );
       if (!isEmpty(token) && !isEmpty(refreshToken)) {
         cookies.save(StringConstants.COOKIE_TOKEN, token, {
           path: RouteConstants.LOGIN,
@@ -97,21 +119,15 @@ const RedirectScreen = (props) => {
         cookies.save(StringConstants.COOKIE_REFRESH_TOKEN, refreshToken, {
           path: RouteConstants.LOGIN,
         });
-        redirectUser();
-      } else if (!isEmpty(redirect)) {
-        const otherParams = getAllParamsAsStringFromUrl(location.search, [
-          RouteConstants.REDIRECT_KEYWORD,
-        ]);
-        redirectUser(redirect + otherParams);
+
+        redirectUser(RouteConstants.OVERVIEW, RouteConstants.LOGIN);
+      } else {
+        navigate(RouteConstants.LOGIN, { replace: true });
       }
-    } else if (isAuthenticatedUser()) {
-      redirectUser();
-    } else {
-      navigate(RouteConstants.LOGIN, { redirect: true });
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return <PageLoader title='Loading ...' />;
+  return <PageLoader title='Redirecting ...' />;
 };
 
 export default RedirectScreen;
