@@ -3,7 +3,7 @@ import isEmpty from 'lodash.isempty';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 
-const timeout = 1000;
+const timeout = 500;
 
 const generateHashPassword = (passwordPlainText) => {
   const hash = bcrypt.hashSync(passwordPlainText, 10);
