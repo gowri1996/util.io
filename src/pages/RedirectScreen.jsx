@@ -83,18 +83,18 @@ const RedirectScreen = (props) => {
       // Unsecure Component
       if (isAuthenticatedUser()) {
         redirectUser(
-          RouteConstants.WALLET_OVERVIEW,
-          redirectUrl ? redirectUrl : RouteConstants.LOGIN
+          RouteConstants.PRODUCTS,
+          redirectUrl ? redirectUrl : RouteConstants.BASE
         );
       } else {
         if (!isEmpty(getUserDataFromCookie())) {
           redirectUser(
-            RouteConstants.WALLET_OVERVIEW,
-            redirectUrl ? redirectUrl : RouteConstants.LOGIN
+            RouteConstants.PRODUCTS,
+            redirectUrl ? redirectUrl : RouteConstants.BASE
           );
         } else {
           deleteToken();
-          navigate(redirectUrl ? redirectUrl : RouteConstants.LOGIN, {
+          navigate(redirectUrl ? redirectUrl : RouteConstants.BASE, {
             replace: true,
           });
         }
@@ -102,8 +102,8 @@ const RedirectScreen = (props) => {
     } else if (securityParam === Constants.SECURE_VALUE) {
       // Secure Component
       redirectUser(
-        redirectUrl ? redirectUrl : RouteConstants.WALLET_OVERVIEW,
-        RouteConstants.LOGIN
+        redirectUrl ? redirectUrl : RouteConstants.PRODUCTS,
+        RouteConstants.BASE
       );
     } else {
       // After login step
@@ -122,7 +122,7 @@ const RedirectScreen = (props) => {
           expires,
         });
 
-        redirectUser(RouteConstants.WALLET_OVERVIEW, RouteConstants.LOGIN);
+        redirectUser(RouteConstants.PRODUCTS, RouteConstants.LOGIN);
       } else {
         navigate(RouteConstants.LOGIN, { replace: true });
       }

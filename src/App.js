@@ -8,6 +8,7 @@ import Header from './components/Header';
 import LoginScreen from './pages/LoginScreen';
 import NotFoundScreen from './pages/NotFoundScreen';
 import OverviewScreen from './pages/wallet/OverviewScreen';
+import ProductsScreen from './pages/ProductsScreen';
 import RedirectScreen from './pages/RedirectScreen';
 import RegisterScreen from './pages/RegisterScreen';
 import RouteConstants from './constants/RouteConstants';
@@ -30,6 +31,7 @@ const App = () => {
         />
         <Route path={RouteConstants.REGISTER} element={<RegisterScreen />} />
         <Route path={RouteConstants.REDIRECT} element={<RedirectScreen />} />
+        <Route path={RouteConstants.PRODUCTS} element={<ProductsScreen />} />
         <Route
           path={RouteConstants.WALLET_BASE}
           element={<Navigate replace to={RouteConstants.WALLET_OVERVIEW} />}

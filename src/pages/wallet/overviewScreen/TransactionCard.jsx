@@ -43,7 +43,7 @@ const TransactionCard = (props) => {
         actions={[
           <Tooltip label='Edit Transaction' fontSize='xs' placement='top'>
             <IconButton
-              aria-label='updateIcon'
+              aria-label='update-icon'
               icon={<FaEdit />}
               size='md'
               onClick={() => {
@@ -54,7 +54,7 @@ const TransactionCard = (props) => {
           <Tooltip label='Delete Transaction' fontSize='xs' placement='top'>
             <IconButton
               variant='danger'
-              aria-label='deleteIcon'
+              aria-label='delete-icon'
               icon={<FaRegWindowClose />}
               size='md'
               onClick={() => {

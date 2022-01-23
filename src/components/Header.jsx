@@ -40,7 +40,7 @@ const Header = () => {
       await dispatch(logout()).unwrap();
       setLoading(false);
       deleteToken();
-      navigate(RouteConstants.LOGIN, { replace: true });
+      navigate(RouteConstants.BASE, { replace: true });
     } catch (error) {
       toast(
         AppUtils.errorToastMessage({
@@ -70,7 +70,7 @@ const Header = () => {
             ml={2}
             size='md'
             variant='icon'
-            aria-label='homeIcon'
+            aria-label='home-icon'
             as={RouterLink}
             to={RouteConstants.BASE}
             icon={<FaHourglassEnd color='#00FF00' />}
@@ -88,7 +88,7 @@ const Header = () => {
               mr={2}
               size='md'
               variant='icon'
-              aria-label='themeIcon'
+              aria-label='theme-icon'
               icon={useColorModeValue(
                 <FaSun color='#FFA500' />,
                 <FaMoon color='#808080' />
