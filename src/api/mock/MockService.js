@@ -3,7 +3,7 @@ import isEmpty from 'lodash.isempty';
 import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid';
 
-const timeout = 0;
+const timeout = 1000;
 
 const generateHashPassword = (passwordPlainText) => {
   const hash = bcrypt.hashSync(passwordPlainText, 10);
@@ -44,7 +44,7 @@ const registerUserService = (request) => {
         const user = {
           ...request,
           _id: uuidv4(),
-          expenses: [],
+          transactions: [],
           token: null,
           refreshToken: null,
         };
@@ -70,7 +70,7 @@ const loginUserService = (request) => {
       try {
         let localUsers = JSON.parse(localStorage.getItem('users'));
         if (!Array.isArray(localUsers)) {
-          reject({ message: 'Invalid Email / Password' });
+          reject({ message: 'Invalid. Try again later' });
           return;
         }
         const user = localUsers.find(
@@ -83,14 +83,14 @@ const loginUserService = (request) => {
 
         const token = jwt.sign({ email: request.email }, 'token', {
           expiresIn: '24h',
-          issuer: 'expense-tracker',
+          issuer: 'util.io',
         });
         const refreshToken = jwt.sign(
           { email: request.email },
           'refreshToken',
           {
             expiresIn: '7d',
-            issuer: 'expense-tracker',
+            issuer: 'util.io',
           }
         );
 
@@ -117,7 +117,7 @@ const resetPasswordUserService = (request) => {
       try {
         let localUsers = JSON.parse(localStorage.getItem('users'));
         if (!Array.isArray(localUsers)) {
-          reject({ message: 'Invalid Email / Password' });
+          reject({ message: 'Invalid. Try again later' });
           return;
         }
         const user = localUsers.find(
@@ -150,7 +150,7 @@ const getUserFullDetails = (token) => {
       try {
         let localUsers = JSON.parse(localStorage.getItem('users'));
         if (!Array.isArray(localUsers)) {
-          reject({ message: 'Invalid Email / Password', status: 400 });
+          reject({ message: 'Invalid. Try again later', status: 400 });
           return;
         }
 
@@ -170,7 +170,6 @@ const getUserFullDetails = (token) => {
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
-          expenses: user.expenses,
           token: user.token,
           refreshToken: user.refreshToken,
         };
@@ -193,7 +192,7 @@ const refreshTokens = (refreshToken) => {
       try {
         let localUsers = JSON.parse(localStorage.getItem('users'));
         if (!Array.isArray(localUsers)) {
-          reject({ message: 'Invalid Email / Password' });
+          reject({ message: 'Invalid. Try again later' });
           return;
         }
 
@@ -212,14 +211,14 @@ const refreshTokens = (refreshToken) => {
 
         const newToken = jwt.sign({ email: user.email }, 'token', {
           expiresIn: '24h',
-          issuer: 'expense-tracker',
+          issuer: 'util.io',
         });
         const newRefreshToken = jwt.sign(
           { email: user.email },
           'refreshToken',
           {
             expiresIn: '7d',
-            issuer: 'expense-tracker',
+            issuer: 'util.io',
           }
         );
 
@@ -233,7 +232,6 @@ const refreshTokens = (refreshToken) => {
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
-          expenses: user.expenses,
           token: user.token,
           refreshToken: user.refreshToken,
         };
@@ -277,27 +275,13 @@ const logoutUser = (token) => {
   });
 };
 
-const getExpenseCategories = () => {
-  return new Promise((resolve, reject) => {
-    try {
-      resolve([
-        { _id: 'food', name: 'Food' },
-        { _id: 'party', name: 'Party' },
-        { _id: 'college', name: 'College' },
-      ]);
-    } catch (err) {
-      reject(err);
-    }
-  });
-};
-
-const createExpense = (request) => {
+const createTransaction = (request) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
         let localUsers = JSON.parse(localStorage.getItem('users'));
         if (!Array.isArray(localUsers)) {
-          reject({ message: 'Invalid Email / Password', status: 400 });
+          reject({ message: 'Invalid. Try again later', status: 400 });
           return;
         }
 
@@ -314,19 +298,19 @@ const createExpense = (request) => {
         }
 
         const currentTime = new Date();
-        const expense = {
-          ...request.expense,
+        const transaction = {
+          ...request.transaction,
           _id: uuidv4(),
           createdAt: currentTime.toString(),
           updatedAt: currentTime.toString(),
         };
-        user.expenses = [...user.expenses, expense];
+        user.transactions = [...user.transactions, transaction];
         localStorage.setItem('users', JSON.stringify(localUsers));
 
         resolve({
           status: 200,
-          message: 'Expense created successfully',
-          data: expense,
+          message: 'Transaction created successfully',
+          data: transaction,
         });
       } catch (err) {
         reject(err);
@@ -335,13 +319,13 @@ const createExpense = (request) => {
   });
 };
 
-const deleteExpense = (request) => {
+const deleteTransaction = (request) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
         let localUsers = JSON.parse(localStorage.getItem('users'));
         if (!Array.isArray(localUsers)) {
-          reject({ message: 'Invalid Email / Password', status: 400 });
+          reject({ message: 'Invalid. Try again later', status: 400 });
           return;
         }
 
@@ -357,22 +341,27 @@ const deleteExpense = (request) => {
           return;
         }
 
-        const expense = user.expenses.find(
-          (expense) => expense._id === request.expenseId
+        const transaction = user.transactions.find(
+          (transaction) => transaction._id === request.transactionId
         );
-        if (expense)
-          user.expenses.splice(
-            user.expenses.findIndex(
-              (expense) => expense._id === request.expenseId
+        if (transaction) {
+          user.transactions.splice(
+            user.transactions.findIndex(
+              (transaction) => transaction._id === request.transactionId
             ),
             1
           );
+        } else {
+          reject({ message: 'Transaction not available', status: 400 });
+          return;
+        }
+
         localStorage.setItem('users', JSON.stringify(localUsers));
 
         resolve({
           status: 200,
-          message: 'Expense deleted successfully',
-          data: expense,
+          message: 'Transaction deleted successfully',
+          data: transaction,
         });
       } catch (err) {
         reject(err);
@@ -381,13 +370,13 @@ const deleteExpense = (request) => {
   });
 };
 
-const updateExpense = (request) => {
+const updateTransaction = (request) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
         let localUsers = JSON.parse(localStorage.getItem('users'));
         if (!Array.isArray(localUsers)) {
-          reject({ message: 'Invalid Email / Password', status: 400 });
+          reject({ message: 'Invalid. Try again later', status: 400 });
           return;
         }
 
@@ -403,19 +392,58 @@ const updateExpense = (request) => {
           return;
         }
 
-        const expense = user.expenses.find(
-          (expense) => expense._id === request.expenseId
+        const transaction = user.transactions.find(
+          (transaction) => transaction._id === request.transactionId
         );
-        if (expense)
-          Object.assign(expense, expense, request.expense, {
+        if (transaction) {
+          Object.assign(transaction, transaction, request.transaction, {
             updatedAt: new Date().toString(),
           });
+        } else {
+          reject({ message: 'Transaction not available', status: 400 });
+          return;
+        }
+
         localStorage.setItem('users', JSON.stringify(localUsers));
 
         resolve({
           status: 200,
-          message: 'Expense updated successfully',
-          data: expense,
+          message: 'Transaction updated successfully',
+          data: transaction,
+        });
+      } catch (err) {
+        reject(err);
+      }
+    }, timeout);
+  });
+};
+
+const fetchTransactions = (request) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        const userId = request;
+        let localUsers = JSON.parse(localStorage.getItem('users'));
+        if (!Array.isArray(localUsers)) {
+          reject({ message: 'Invalid. Try again later', status: 400 });
+          return;
+        }
+
+        const user = localUsers.find((localUser) => localUser._id === userId);
+        if (isEmpty(user)) {
+          reject({ message: 'Invalid credentials', status: 400 });
+          return;
+        }
+
+        if (!isTokenValid(user.token)) {
+          reject({ message: 'Token Expired', status: 401 });
+          return;
+        }
+
+        resolve({
+          status: 200,
+          message: 'Transaction fetched successfully',
+          data: user.transactions,
         });
       } catch (err) {
         reject(err);
@@ -432,10 +460,10 @@ const exportData = {
   refreshTokens,
   logoutUser,
 
-  getExpenseCategories,
-  createExpense,
-  deleteExpense,
-  updateExpense,
+  createTransaction,
+  deleteTransaction,
+  updateTransaction,
+  fetchTransactions,
 };
 
 export default exportData;

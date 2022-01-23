@@ -4,13 +4,7 @@ import React from 'react';
 
 const CardHeader = ({ title, ...flexProps }) => {
   return (
-    <Flex
-      align='center'
-      justify='space-between'
-      p={4}
-      borderBottomWidth='2px'
-      {...flexProps}
-    >
+    <Flex pt={4} pb={4} ml={4} borderBottomWidth='2px' {...flexProps}>
       <Heading fontSize='x-large'>{title}</Heading>
     </Flex>
   );

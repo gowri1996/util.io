@@ -9,9 +9,8 @@ const Card = ({ children, ...rest }) => {
   return (
     <Box
       boxShadow='md'
-      borderWidth={1}
-      borderRadius={30}
-      bg={useColorModeValue('#FCFCFC', '#181818')}
+      borderRadius={8}
+      bg={useColorModeValue('#FFFFFF', '#0E1E25')}
       {...rest}
     >
       {children}

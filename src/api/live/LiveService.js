@@ -34,25 +34,25 @@ const logoutUser = (token) => {
   });
 };
 
-const getExpenseCategories = () => {
-  return new Promise((resolve, reject) => {
-    resolve();
-  });
-};
-
-const createExpense = (request) => {
+const createTransaction = (request) => {
   return new Promise((resolve, reject) => {
     resolve(request);
   });
 };
 
-const deleteExpense = (request) => {
+const deleteTransaction = (request) => {
   return new Promise((resolve, reject) => {
     resolve(request);
   });
 };
 
-const updateExpense = (request) => {
+const updateTransaction = (request) => {
+  return new Promise((resolve, reject) => {
+    resolve(request);
+  });
+};
+
+const fetchTransactions = (request) => {
   return new Promise((resolve, reject) => {
     resolve(request);
   });
@@ -66,10 +66,10 @@ const exportData = {
   refreshTokens,
   logoutUser,
 
-  getExpenseCategories,
-  createExpense,
-  deleteExpense,
-  updateExpense,
+  createTransaction,
+  deleteTransaction,
+  updateTransaction,
+  fetchTransactions,
 };
 
 export default exportData;

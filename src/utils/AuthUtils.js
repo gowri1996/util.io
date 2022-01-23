@@ -1,4 +1,5 @@
-import StringConstants from '../constants/StringConstants';
+import Constants from '../constants/Constants';
+import RouteConstants from '../constants/RouteConstants';
 import cookies from 'react-cookies';
 import isEmpty from 'lodash.isempty';
 import jwt from 'jsonwebtoken';
@@ -16,17 +17,17 @@ const isTokenValid = (token) => {
 };
 
 const isAuthenticatedUser = () => {
-  const token = cookies.load(StringConstants.COOKIE_TOKEN);
+  const token = cookies.load(Constants.COOKIE_TOKEN);
   return isTokenValid(token);
 };
 
 const isRefreshTokenValid = () => {
-  const refreshToken = cookies.load(StringConstants.COOKIE_REFRESH_TOKEN);
+  const refreshToken = cookies.load(Constants.COOKIE_REFRESH_TOKEN);
   return isTokenValid(refreshToken);
 };
 
 const getUserDataFromCookie = () => {
-  const token = cookies.load(StringConstants.COOKIE_TOKEN);
+  const token = cookies.load(Constants.COOKIE_TOKEN);
   if (token) {
     const decoded = jwt.decode(token);
     return decoded;
@@ -35,8 +36,12 @@ const getUserDataFromCookie = () => {
 };
 
 const deleteToken = () => {
-  cookies.remove(StringConstants.COOKIE_TOKEN);
-  cookies.remove(StringConstants.COOKIE_REFRESH_TOKEN);
+  cookies.remove(Constants.COOKIE_TOKEN, {
+    path: RouteConstants.BASE,
+  });
+  cookies.remove(Constants.COOKIE_REFRESH_TOKEN, {
+    path: RouteConstants.BASE,
+  });
 };
 
 export {

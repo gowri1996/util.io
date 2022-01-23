@@ -5,8 +5,8 @@ const modal = {
     const bg = mode('#FCFCFC', '#181818')(props);
     return {
       dialog: {
-        borderRadius: 'lg',
-        bg: bg,
+        bg,
+        borderRadius: 'md',
         zIndex: 'modal',
         width: {
           xs: '85%',

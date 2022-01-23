@@ -36,20 +36,20 @@ const logoutUser = (token) => {
   return service.logoutUser(token);
 };
 
-const getExpenseCategories = () => {
-  return service.getExpenseCategories();
+const createTransaction = (request) => {
+  return service.createTransaction(request);
 };
 
-const createExpense = (request) => {
-  return service.createExpense(request);
+const deleteTransaction = (request) => {
+  return service.deleteTransaction(request);
 };
 
-const deleteExpense = (request) => {
-  return service.deleteExpense(request);
+const updateTransaction = (request) => {
+  return service.updateTransaction(request);
 };
 
-const updateExpense = (request) => {
-  return service.updateExpense(request);
+const fetchTransactions = (request) => {
+  return service.fetchTransactions(request);
 };
 
 const exportData = {
@@ -62,10 +62,10 @@ const exportData = {
   refreshTokens,
   logoutUser,
 
-  getExpenseCategories,
-  createExpense,
-  deleteExpense,
-  updateExpense,
+  createTransaction,
+  deleteTransaction,
+  updateTransaction,
+  fetchTransactions,
 };
 
 export default exportData;

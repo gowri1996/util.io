@@ -10,9 +10,9 @@ import {
 import { getUserFromToken, refreshTokens } from '../app/slices/userSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import Constants from '../constants/Constants';
 import PageLoader from '../components/PageLoader';
 import RouteConstants from '../constants/RouteConstants';
-import StringConstants from '../constants/StringConstants';
 import cookies from 'react-cookies';
 import isEmpty from 'lodash.isempty';
 import { useDispatch } from 'react-redux';
@@ -28,10 +28,8 @@ const RedirectScreen = (props) => {
     expires.setFullYear(expires.getFullYear() + 1); // add 1 year
 
     async function redirectUser(successRedirectionUrl, failureRedirectionUrl) {
-      const savedToken = cookies.load(StringConstants.COOKIE_TOKEN);
-      const savedRefreshToken = cookies.load(
-        StringConstants.COOKIE_REFRESH_TOKEN
-      );
+      const savedToken = cookies.load(Constants.COOKIE_TOKEN);
+      const savedRefreshToken = cookies.load(Constants.COOKIE_REFRESH_TOKEN);
       try {
         await dispatch(getUserFromToken(savedToken)).unwrap();
         navigate(successRedirectionUrl, { replace: true });
@@ -42,15 +40,15 @@ const RedirectScreen = (props) => {
             const response = await dispatch(
               refreshTokens(savedRefreshToken)
             ).unwrap();
-            cookies.save(StringConstants.COOKIE_TOKEN, response.data.token, {
-              path: RouteConstants.LOGIN,
+            cookies.save(Constants.COOKIE_TOKEN, response.data.token, {
+              path: RouteConstants.BASE,
               expires,
             });
             cookies.save(
-              StringConstants.COOKIE_REFRESH_TOKEN,
+              Constants.COOKIE_REFRESH_TOKEN,
               response.data.refreshToken,
               {
-                path: RouteConstants.LOGIN,
+                path: RouteConstants.BASE,
                 expires,
               }
             );
@@ -69,29 +67,29 @@ const RedirectScreen = (props) => {
 
     const securityParam = getParamsFromUrl(
       location.search,
-      StringConstants.SECURE_KEYWORD
+      Constants.SECURE_KEYWORD
     );
     const redirect = getParamsFromUrl(
       location.search,
-      StringConstants.REDIRECT_KEYWORD
+      Constants.REDIRECT_KEYWORD
     );
     const otherParams = getAllParamsAsStringFromUrl(location.search, [
-      StringConstants.REDIRECT_KEYWORD,
-      StringConstants.SECURE_KEYWORD,
+      Constants.REDIRECT_KEYWORD,
+      Constants.SECURE_KEYWORD,
     ]);
     const redirectUrl = redirect ? redirect + otherParams : '';
 
-    if (securityParam === StringConstants.UN_SECURE_VALUE) {
+    if (securityParam === Constants.UN_SECURE_VALUE) {
       // Unsecure Component
       if (isAuthenticatedUser()) {
         redirectUser(
-          RouteConstants.OVERVIEW,
+          RouteConstants.WALLET_OVERVIEW,
           redirectUrl ? redirectUrl : RouteConstants.LOGIN
         );
       } else {
         if (!isEmpty(getUserDataFromCookie())) {
           redirectUser(
-            RouteConstants.OVERVIEW,
+            RouteConstants.WALLET_OVERVIEW,
             redirectUrl ? redirectUrl : RouteConstants.LOGIN
           );
         } else {
@@ -101,33 +99,30 @@ const RedirectScreen = (props) => {
           });
         }
       }
-    } else if (securityParam === StringConstants.SECURE_VALUE) {
+    } else if (securityParam === Constants.SECURE_VALUE) {
       // Secure Component
       redirectUser(
-        redirectUrl ? redirectUrl : RouteConstants.OVERVIEW,
+        redirectUrl ? redirectUrl : RouteConstants.WALLET_OVERVIEW,
         RouteConstants.LOGIN
       );
     } else {
       // After login step
-      const token = getParamsFromUrl(
-        location.search,
-        StringConstants.COOKIE_TOKEN
-      );
+      const token = getParamsFromUrl(location.search, Constants.COOKIE_TOKEN);
       const refreshToken = getParamsFromUrl(
         location.search,
-        StringConstants.COOKIE_REFRESH_TOKEN
+        Constants.COOKIE_REFRESH_TOKEN
       );
       if (!isEmpty(token) && !isEmpty(refreshToken)) {
-        cookies.save(StringConstants.COOKIE_TOKEN, token, {
-          path: RouteConstants.LOGIN,
+        cookies.save(Constants.COOKIE_TOKEN, token, {
+          path: RouteConstants.BASE,
           expires,
         });
-        cookies.save(StringConstants.COOKIE_REFRESH_TOKEN, refreshToken, {
-          path: RouteConstants.LOGIN,
+        cookies.save(Constants.COOKIE_REFRESH_TOKEN, refreshToken, {
+          path: RouteConstants.BASE,
           expires,
         });
 
-        redirectUser(RouteConstants.OVERVIEW, RouteConstants.LOGIN);
+        redirectUser(RouteConstants.WALLET_OVERVIEW, RouteConstants.LOGIN);
       } else {
         navigate(RouteConstants.LOGIN, { replace: true });
       }

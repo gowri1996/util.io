@@ -14,17 +14,16 @@ import {
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react';
-import { FaHamburger, FaInfo, FaMoon, FaSun } from 'react-icons/fa';
+import { FaHourglassEnd, FaMapSigns, FaMoon, FaSun } from 'react-icons/fa';
 import React, { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { getUser, logout } from '../app/slices/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AppUtils from '../utils/AppUtils';
 import RouteConstants from '../constants/RouteConstants';
-import ThemeConstants from '../constants/ThemeConstants';
 import { deleteToken } from '../utils/AuthUtils';
 import isEmpty from 'lodash.isempty';
-import { logout } from '../app/slices/userSlice';
 
 const Header = () => {
   const { toggleColorMode } = useColorMode();
@@ -32,7 +31,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.user);
+  const user = useSelector(getUser);
   const [loading, setLoading] = useState(false);
 
   const onLogout = async () => {
@@ -59,24 +58,22 @@ const Header = () => {
       height='50px'
       width='full'
       position='sticky'
-      boxShadow='sm'
-      backgroundColor={useColorModeValue(
-        ThemeConstants.LIGHT_THEME_PRIMARY_COLOR,
-        ThemeConstants.DARK_THEME_PRIMARY_COLOR
-      )}
+      backgroundColor={useColorModeValue('#021117', '#0E1E25')}
       top={0}
       zIndex={1}
+      boxShadow={'md'}
     >
       <Flex>
         <Box>
           <IconButton
+            mt={1}
+            ml={2}
+            size='md'
+            variant='icon'
             aria-label='homeIcon'
             as={RouterLink}
-            to={RouteConstants.LOGIN}
-            icon={<FaInfo />}
-            mt={1}
-            mr={2}
-            size='md'
+            to={RouteConstants.BASE}
+            icon={<FaHourglassEnd color='#00FF00' />}
           />
         </Box>
         <Spacer />
@@ -87,11 +84,15 @@ const Header = () => {
             placement='left'
           >
             <IconButton
-              aria-label='themeIcon'
-              icon={useColorModeValue(<FaSun />, <FaMoon />)}
               mt={1}
               mr={2}
               size='md'
+              variant='icon'
+              aria-label='themeIcon'
+              icon={useColorModeValue(
+                <FaSun color='#FFA500' />,
+                <FaMoon color='#808080' />
+              )}
               onClick={() => {
                 toggleColorMode();
               }}
@@ -101,12 +102,14 @@ const Header = () => {
             <Menu>
               <Tooltip label='Actions' fontSize='xs' placement='left'>
                 <MenuButton
+                  mt={2}
+                  size='md'
+                  variant='header-menu-icon'
                   as={Button}
                   aria-label='actions'
-                  size='md'
                   isLoading={loading}
                 >
-                  <Icon as={FaHamburger} />
+                  <Icon as={FaMapSigns} />
                 </MenuButton>
               </Tooltip>
               <MenuList>

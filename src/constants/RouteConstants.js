@@ -1,12 +1,14 @@
 const appBase = '/';
 
 const routes = {
-  LOGIN: appBase,
+  BASE: appBase,
+  LOGIN: appBase + 'login',
   REGISTER: appBase + 'register',
   FORGOT_PASSWORD: appBase + 'forgot-password',
   REDIRECT: appBase + 'redirect',
-  OVERVIEW: appBase + 'overview',
-  ANALYTICS: appBase + 'analytics',
+  WALLET_BASE: appBase + 'wallet',
+  WALLET_OVERVIEW: appBase + 'wallet/overview',
+  WALLET_ANALYTICS: appBase + 'wallet/analytics',
 };
 
 export default routes;

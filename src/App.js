@@ -1,24 +1,28 @@
 import './App.css';
 
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
-import AnalyticsScreen from './pages/expense/AnalyticsScreen';
-import ExpensePageSetup from './pages/ExpensePageSetup';
+import AnalyticsScreen from './pages/wallet/AnalyticsScreen';
 import ForgotPasswordScreen from './pages/ForgotPasswordScreen';
 import Header from './components/Header';
 import LoginScreen from './pages/LoginScreen';
 import NotFoundScreen from './pages/NotFoundScreen';
-import OverviewScreen from './pages/expense/OverviewScreen';
+import OverviewScreen from './pages/wallet/OverviewScreen';
 import RedirectScreen from './pages/RedirectScreen';
 import RegisterScreen from './pages/RegisterScreen';
 import RouteConstants from './constants/RouteConstants';
 import { VStack } from '@chakra-ui/react';
+import WalletPageSetup from './pages/wallet/WalletPageSetup';
 
 const App = () => {
   return (
     <VStack as='main' height='100vh'>
       <Header />
       <Routes>
+        <Route
+          path={RouteConstants.BASE}
+          element={<Navigate replace to={RouteConstants.LOGIN} />}
+        />
         <Route path={RouteConstants.LOGIN} element={<LoginScreen />} />
         <Route
           path={RouteConstants.FORGOT_PASSWORD}
@@ -27,21 +31,25 @@ const App = () => {
         <Route path={RouteConstants.REGISTER} element={<RegisterScreen />} />
         <Route path={RouteConstants.REDIRECT} element={<RedirectScreen />} />
         <Route
-          path={RouteConstants.OVERVIEW}
+          path={RouteConstants.WALLET_BASE}
+          element={<Navigate replace to={RouteConstants.WALLET_OVERVIEW} />}
+        />
+        <Route
+          path={RouteConstants.WALLET_OVERVIEW}
           element={
-            <ExpensePageSetup
+            <WalletPageSetup
               key='overview'
-              title='Overview | Expense Tracker'
+              title='Wallet | Overview'
               component={<OverviewScreen />}
             />
           }
         />
         <Route
-          path={RouteConstants.ANALYTICS}
+          path={RouteConstants.WALLET_ANALYTICS}
           element={
-            <ExpensePageSetup
+            <WalletPageSetup
               key='analytics'
-              title='Analytics | Expense Tracker'
+              title='Wallet | Analytics'
               component={<AnalyticsScreen />}
             />
           }

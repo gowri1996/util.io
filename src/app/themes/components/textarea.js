@@ -1,28 +1,27 @@
-import { getColor, mode } from '@chakra-ui/theme-tools';
-
-import ThemeConstants from '../../../constants/ThemeConstants';
+import { mode } from '@chakra-ui/theme-tools';
 
 const textarea = {
-  variants: {
-    outline: (props) => {
-      const color = mode(
-        ThemeConstants.LIGHT_THEME_PRIMARY_COLOR,
-        ThemeConstants.DARK_THEME_PRIMARY_COLOR
-      )(props);
-      const rawColor = getColor(props.theme, color);
-      return {
-        _focus: {
-          zIndex: 1,
-          borderColor: color,
-          boxShadow: `0 0 0 1.5px ${rawColor}`,
-        },
-        _active: {
-          zIndex: 1,
-          borderColor: color,
-          boxShadow: `0 0 0 1.5px ${rawColor}`,
-        },
-      };
-    },
+  baseStyle: (props) => {
+    return {
+      bg: 'transparent',
+      borderWidth: 2,
+      borderStyle: 'solid',
+      _active: {
+        zIndex: 1,
+        borderColor: mode('#339933', '#0BCBBB')(props),
+      },
+      _hover: {
+        zIndex: 1,
+        borderColor: mode('#339933', '#0BCBBB')(props),
+      },
+      _focus: {
+        zIndex: 1,
+        borderColor: mode('#339933', '#0BCBBB')(props),
+      },
+    };
+  },
+  defaultProps: {
+    variant: null, // null here
   },
 };
 

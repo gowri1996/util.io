@@ -68,7 +68,7 @@ const RegisterScreen = (props) => {
   return (
     <>
       <Helmet>
-        <title>Register | Expense Tracker</title>
+        <title>Util.io | Register</title>
       </Helmet>
       <Box
         style={{ margin: 'auto' }}
@@ -140,11 +140,7 @@ const RegisterScreen = (props) => {
                 />
               </FormControl>
               <Box textAlign='left' pt={3}>
-                <Link
-                  as={RouterLink}
-                  to={RouteConstants.LOGIN}
-                  color='blue.500'
-                >
+                <Link as={RouterLink} to={RouteConstants.LOGIN}>
                   Already have an account ?
                 </Link>
               </Box>

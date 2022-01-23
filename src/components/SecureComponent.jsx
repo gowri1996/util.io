@@ -1,9 +1,10 @@
 import { Box, Link, Text } from '@chakra-ui/react';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 
+import Constants from '../constants/Constants';
 import RouteConstants from '../constants/RouteConstants';
-import StringConstants from '../constants/StringConstants';
 import cookies from 'react-cookies';
+import { getUser } from '../app/slices/userSlice';
 import { isAuthenticatedUser } from '../utils/AuthUtils';
 import isEmpty from 'lodash.isempty';
 import { useEffect } from 'react';
@@ -11,16 +12,16 @@ import { useSelector } from 'react-redux';
 
 const secureComponent = (Page) => {
   return (props) => {
-    const user = useSelector((state) => state.user);
-    const token = cookies.load(StringConstants.COOKIE_TOKEN);
+    const user = useSelector(getUser);
+    const token = cookies.load(Constants.COOKIE_TOKEN);
     const isTokenValid = isAuthenticatedUser();
     const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
       if (!isEmpty(token) && (isEmpty(user._id) || !isTokenValid)) {
-        let route = `${RouteConstants.REDIRECT}?${StringConstants.SECURE_KEYWORD}=${StringConstants.SECURE_VALUE}`; // construct secure component value
-        route += `&${StringConstants.REDIRECT_KEYWORD}=${location.pathname}`; // construct redirect pathname
+        let route = `${RouteConstants.REDIRECT}?${Constants.SECURE_KEYWORD}=${Constants.SECURE_VALUE}`; // construct secure component value
+        route += `&${Constants.REDIRECT_KEYWORD}=${location.pathname}`; // construct redirect pathname
         route += location.search ? '&' + location.search.slice(1) : ''; // add query params to url. slice to remove '?' character
         navigate(route, { replace: true });
       }
@@ -31,7 +32,7 @@ const secureComponent = (Page) => {
         <Box>
           <Text>
             You're not logged in to the system. Try to
-            <Link color='blue.500' as={RouterLink} to={RouteConstants.LOGIN}>
+            <Link as={RouterLink} to={RouteConstants.LOGIN}>
               {' Login'}
             </Link>
           </Text>

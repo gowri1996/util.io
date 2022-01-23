@@ -1,18 +1,11 @@
-import ThemeConstants from '../../../constants/ThemeConstants';
 import { mode } from '@chakra-ui/theme-tools';
 
 const button = {
   variants: {
     solid: (props) => {
-      const bg = mode(
-        ThemeConstants.LIGHT_THEME_PRIMARY_COLOR,
-        ThemeConstants.DARK_THEME_PRIMARY_COLOR
-      )(props);
-      const hoverBg = mode(
-        ThemeConstants.LIGHT_THEME_PRIMARY_HOVER_COLOR,
-        ThemeConstants.DARK_THEME_PRIMARY_HOVER_COLOR
-      )(props);
-      const color = mode('#121212', '#F8F8F8')(props);
+      const bg = mode('#15847B', '#0BCBBB')(props);
+      const hoverBg = mode('#0A423E', '#9EFAF2')(props);
+      const color = mode('#FFFFFF', '#083532')(props);
       return {
         bg,
         _active: {
@@ -39,15 +32,9 @@ const button = {
       };
     },
     danger: (props) => {
-      const color = mode('#121212', '#F8F8F8')(props);
-      const bg = mode(
-        ThemeConstants.LIGHT_THEME_DANGER_COLOR,
-        ThemeConstants.DARK_THEME_DANGER_COLOR
-      )(props);
-      const hoverBg = mode(
-        ThemeConstants.LIGHT_THEME_DANGER_HOVER_COLOR,
-        ThemeConstants.DARK_THEME_DANGER_HOVER_COLOR
-      )(props);
+      const bg = mode('#DE3737', '#E84F4F')(props);
+      const hoverBg = mode('#611D1D', '#EB7F7F')(props);
+      const color = mode('#FFFFFF', '#083532')(props);
       return {
         bg,
         _active: {
@@ -71,6 +58,25 @@ const button = {
           opacity: 0.5,
         },
         color,
+      };
+    },
+    icon: (props) => {
+      return {
+        bg: 'transparent',
+        _focus: {
+          borderColor: 'transparent',
+          boxShadow: '0 0 0 1px transparent',
+        },
+      };
+    },
+    'header-menu-icon': (props) => {
+      return {
+        bg: 'transparent',
+        _focus: {
+          borderColor: 'transparent',
+          boxShadow: '0 0 0 1px transparent',
+        },
+        color: '#FFFFFF',
       };
     },
   },

@@ -1,13 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import Service from '../../api/Service';
+import { resetTransaction } from './transactionSlice';
 
 export const logout = createAsyncThunk(
   'user/logout',
-  async (_, { getState, rejectWithValue }) => {
+  async (_, { getState, dispatch, rejectWithValue }) => {
     try {
       const user = getState().user;
       const response = await Service.logoutUser(user.token);
+      dispatch(resetTransaction());
       return response;
     } catch (error) {
       return rejectWithValue(error);
@@ -75,61 +77,12 @@ export const refreshTokens = createAsyncThunk(
   }
 );
 
-export const deleteExpense = createAsyncThunk(
-  'user/delete-expense',
-  async (expenseId, { getState, rejectWithValue }) => {
-    try {
-      const user = getState().user;
-      const response = await Service.deleteExpense({
-        expenseId,
-        token: user.token,
-      });
-      return response;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
-
-export const createExpense = createAsyncThunk(
-  'user/create-expense',
-  async (expense, { getState, rejectWithValue }) => {
-    try {
-      const user = getState().user;
-      const response = await Service.createExpense({
-        expense,
-        token: user.token,
-      });
-      return response;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
-
-export const updateExpense = createAsyncThunk(
-  'user/update-expense',
-  async (request, { getState, rejectWithValue }) => {
-    try {
-      const user = getState().user;
-      const response = await Service.updateExpense({
-        ...request,
-        token: user.token,
-      });
-      return response;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
-
 const resetUser = () => {
   return {
     _id: null,
     firstName: null,
     lastName: null,
     email: null,
-    expenses: [],
     token: null,
     refreshToken: null,
   };
@@ -139,13 +92,12 @@ const setUser = (state, action) => {
   return action.payload.data;
 };
 
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: 'user',
   initialState: {
     _id: null,
     firstName: null,
     lastName: null,
-    expenses: [],
     email: null,
     token: null,
     refreshToken: null,
@@ -155,33 +107,10 @@ export const userSlice = createSlice({
     builder
       .addCase(logout.fulfilled, resetUser)
       .addCase(getUserFromToken.fulfilled, setUser)
-      .addCase(refreshTokens.fulfilled, setUser)
-      .addCase(deleteExpense.fulfilled, (state, action) => {
-        state.expenses.splice(
-          state.expenses.findIndex(
-            (expense) => expense._id === action.payload.data._id
-          ),
-          1
-        );
-      })
-      .addCase(createExpense.fulfilled, (state, action) => {
-        state.expenses.push(action.payload.data);
-      })
-      .addCase(updateExpense.fulfilled, (state, action) => {
-        const response = action.payload;
-        const expense = state.expenses.find(
-          (expense) => expense._id === response.data._id
-        );
-        if (expense) {
-          expense.name = response.data.name;
-          expense.expense = response.data.expense;
-          expense.category = response.data.category;
-          expense.description = response.data.description;
-          expense.createdAt = response.data.createdAt;
-          expense.updatedAt = response.data.updatedAt;
-        }
-      });
+      .addCase(refreshTokens.fulfilled, setUser);
   },
 });
+
+export const getUser = (state) => state.user;
 
 export default userSlice.reducer;
