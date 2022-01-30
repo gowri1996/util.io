@@ -54,10 +54,10 @@ const Header = () => {
 
   return (
     <Box
-      as='header'
-      height='50px'
-      width='full'
-      position='sticky'
+      as="header"
+      height="50px"
+      width="full"
+      position="sticky"
       backgroundColor={useColorModeValue('#021117', '#0E1E25')}
       top={0}
       zIndex={1}
@@ -68,30 +68,30 @@ const Header = () => {
           <IconButton
             mt={1}
             ml={2}
-            size='md'
-            variant='icon'
-            aria-label='home-icon'
+            size="md"
+            variant="icon"
+            aria-label="home-icon"
             as={RouterLink}
             to={RouteConstants.BASE}
-            icon={<FaHourglassEnd color='#00FF00' />}
+            icon={<FaHourglassEnd color="#00FF00" />}
           />
         </Box>
         <Spacer />
         <Box>
           <Tooltip
-            label='Toggle light/dark theme'
-            fontSize='xs'
-            placement='left'
+            label="Toggle light/dark theme"
+            fontSize="xs"
+            placement="left"
           >
             <IconButton
               mt={1}
               mr={2}
-              size='md'
-              variant='icon'
-              aria-label='theme-icon'
+              size="md"
+              variant="icon"
+              aria-label="theme-icon"
               icon={useColorModeValue(
-                <FaSun color='#FFA500' />,
-                <FaMoon color='#808080' />
+                <FaSun color="#FFA500" />,
+                <FaMoon color="#808080" />
               )}
               onClick={() => {
                 toggleColorMode();
@@ -100,13 +100,13 @@ const Header = () => {
           </Tooltip>
           {!isEmpty(user._id) && (
             <Menu>
-              <Tooltip label='Actions' fontSize='xs' placement='left'>
+              <Tooltip label="Actions" fontSize="xs" placement="left">
                 <MenuButton
                   mt={2}
-                  size='md'
-                  variant='header-menu-icon'
+                  size="md"
+                  variant="header-menu-icon"
                   as={Button}
-                  aria-label='actions'
+                  aria-label="actions"
                   isLoading={loading}
                 >
                   <Icon as={FaMapSigns} />

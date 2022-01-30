@@ -143,12 +143,12 @@ const OverviewScreen = (props) => {
         </Box>
         <Spacer />
         <Box>
-          <Tooltip label='Add Transaction' placement='left' fontSize='sm'>
+          <Tooltip label="Add Transaction" placement="left" fontSize="sm">
             <IconButton
               variant={'icon'}
-              size='md'
+              size="md"
               icon={<FaPlus />}
-              aria-label='add-transaction-icon'
+              aria-label="add-transaction-icon"
               onClick={() => {
                 setAction('add');
               }}
@@ -157,7 +157,7 @@ const OverviewScreen = (props) => {
         </Box>
       </Flex>
       {transactions.length > 0 ? (
-        <Wrap mt={2} spacing='2'>
+        <Wrap mt={2} spacing="2">
           {transactions.map((transaction) => (
             <WrapItem
               key={transaction._id}
@@ -170,7 +170,7 @@ const OverviewScreen = (props) => {
             >
               <TransactionCard
                 data={transaction}
-                width='full'
+                width="full"
                 onUpdateTransactionClick={setupUpdate}
                 onDeleteTransactionClick={setupDelete}
               />
@@ -179,8 +179,8 @@ const OverviewScreen = (props) => {
         </Wrap>
       ) : (
         <Box
-          mt='15vh'
-          mx='auto'
+          mt="15vh"
+          mx="auto"
           width={{
             xs: '70%',
             sm: '70%',

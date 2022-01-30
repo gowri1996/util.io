@@ -20,8 +20,8 @@ const ProductsScreen = (props) => {
         <title>Util.io | Products</title>
       </Helmet>
       <Flex
-        width='full'
-        height='full'
+        width="full"
+        height="full"
         justifyContent={'center'}
         style={{ marginTop: 0 }}
       >
@@ -53,8 +53,8 @@ const ProductsScreen = (props) => {
               <IconButton
                 h={75}
                 w={75}
-                variant='icon'
-                icon={<Icon as={FaCoins} w={10} h={10} color='#00FF00' />}
+                variant="icon"
+                icon={<Icon as={FaCoins} w={10} h={10} color="#00FF00" />}
               />
               <Text mt={1}>Wallet</Text>
             </Flex>,

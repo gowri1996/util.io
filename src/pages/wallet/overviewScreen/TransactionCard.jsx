@@ -21,10 +21,10 @@ const TransactionCard = (props) => {
   return (
     <Card py={1.5} px={4} borderRadius={10} width={width}>
       <Card.Content mt={1}>
-        <Card.Property label='Name' value={data.name} useTooltip={true} />
-        <Card.Property label='Category' value={data.category} />
+        <Card.Property label="Name" value={data.name} useTooltip={true} />
+        <Card.Property label="Category" value={data.category} />
         <Card.Property
-          label='Amount'
+          label="Amount"
           value={data.amount}
           valueColor={useColorModeValue(
             data.type === 'gain' ? 'green' : '#DE3737',
@@ -32,31 +32,31 @@ const TransactionCard = (props) => {
           )}
         />
         <Card.Property
-          label='Description'
+          label="Description"
           value={data.description}
           useTooltip={true}
         />
-        <Card.Property label='Created At' value={createdAt} />
-        <Card.Property label='Updated At' value={updatedAt} />
+        <Card.Property label="Created At" value={createdAt} />
+        <Card.Property label="Updated At" value={updatedAt} />
       </Card.Content>
       <Card.Footer
         actions={[
-          <Tooltip label='Edit Transaction' fontSize='xs' placement='top'>
+          <Tooltip label="Edit Transaction" fontSize="xs" placement="top">
             <IconButton
-              aria-label='update-icon'
+              aria-label="update-icon"
               icon={<FaEdit />}
-              size='md'
+              size="md"
               onClick={() => {
                 onUpdateTransactionClick(data);
               }}
             />
           </Tooltip>,
-          <Tooltip label='Delete Transaction' fontSize='xs' placement='top'>
+          <Tooltip label="Delete Transaction" fontSize="xs" placement="top">
             <IconButton
-              variant='danger'
-              aria-label='delete-icon'
+              variant="danger"
+              aria-label="delete-icon"
               icon={<FaRegWindowClose />}
-              size='md'
+              size="md"
               onClick={() => {
                 onDeleteTransactionClick(data);
               }}

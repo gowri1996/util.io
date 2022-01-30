@@ -7,10 +7,10 @@ const CardFooter = ({ actions, ...rest }) => {
   return !isEmpty(actions) ? (
     <Box>
       <SimpleGrid
-        mt='2'
+        mt="2"
         columns={actions.length}
         spacing={4}
-        height='50'
+        height="50"
         {...rest}
       >
         {actions.map((ActionComponent, index) => (

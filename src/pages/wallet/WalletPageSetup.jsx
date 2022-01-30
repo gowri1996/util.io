@@ -43,28 +43,28 @@ const WalletPageSetup = ({ title, component }) => {
 
       <Stack
         direction={'row'}
-        overflowY='hidden'
+        overflowY="hidden"
         style={{ marginTop: 0 }}
-        width='full'
-        height='calc(100% - 50px)'
+        width="full"
+        height="calc(100% - 50px)"
       >
         <Navbar styles={{ ...navBarStyleProps }} />
         <Box
-          overflowY='auto'
+          overflowY="auto"
           style={{ margin: '0px' }}
           width={{
             xs: 'calc(100% - 100px)',
             xxl: 'calc(100% - 250px)',
           }}
-          height='full'
+          height="full"
         >
           {transactionFetched ? (
-            <Box width='full' p={4}>
+            <Box width="full" p={4}>
               {component}
             </Box>
           ) : (
-            <Box textAlign='center' mt={50}>
-              <Spinner thickness={3} speed='0.8s' size='xl' />
+            <Box textAlign="center" mt={50}>
+              <Spinner thickness={3} speed="0.8s" size="xl" />
               <Text pt={1}>{'Fetching ...'}</Text>
             </Box>
           )}

@@ -78,15 +78,15 @@ const ForgotPasswordScreen = (props) => {
         }}
       >
         <Card p={4}>
-          <Card.Header title='Forgot Password' />
-          <Card.Content p={4} textAlign='left'>
+          <Card.Header title="Forgot Password" />
+          <Card.Content p={4} textAlign="left">
             <form onSubmit={onSubmit}>
               <FormControl isRequired>
                 <FormLabel>Email</FormLabel>
                 <Input
-                  name='email'
-                  type='email'
-                  placeholder='Enter your email address'
+                  name="email"
+                  type="email"
+                  placeholder="Enter your email address"
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
@@ -98,9 +98,9 @@ const ForgotPasswordScreen = (props) => {
               <FormControl mt={4} isRequired>
                 <FormLabel>New Password</FormLabel>
                 <Input
-                  name='password'
-                  type='password'
-                  placeholder='Enter your password'
+                  name="password"
+                  type="password"
+                  placeholder="Enter your password"
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
@@ -109,8 +109,8 @@ const ForgotPasswordScreen = (props) => {
                   }
                 />
               </FormControl>
-              <Box mt={8} textAlign='center'>
-                <Button type='submit' isLoading={loading}>
+              <Box mt={8} textAlign="center">
+                <Button type="submit" isLoading={loading}>
                   Submit
                 </Button>
               </Box>

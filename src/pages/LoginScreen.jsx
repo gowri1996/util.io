@@ -79,15 +79,15 @@ const LoginScreen = (props) => {
         }}
       >
         <Card p={4}>
-          <Card.Header title='Login' />
-          <Card.Content p={4} textAlign='left'>
+          <Card.Header title="Login" />
+          <Card.Content p={4} textAlign="left">
             <form onSubmit={onSubmit}>
               <FormControl isRequired>
                 <FormLabel>Email</FormLabel>
                 <Input
-                  name='email'
-                  type='email'
-                  placeholder='Enter your email address'
+                  name="email"
+                  type="email"
+                  placeholder="Enter your email address"
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
@@ -99,9 +99,9 @@ const LoginScreen = (props) => {
               <FormControl mt={4} isRequired>
                 <FormLabel>Password</FormLabel>
                 <Input
-                  name='password'
-                  type='password'
-                  placeholder='Enter your password'
+                  name="password"
+                  type="password"
+                  placeholder="Enter your password"
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
@@ -110,7 +110,7 @@ const LoginScreen = (props) => {
                   }
                 />
               </FormControl>
-              <HStack pt={5} fontSize={15} justifyContent='space-between'>
+              <HStack pt={5} fontSize={15} justifyContent="space-between">
                 <Link as={RouterLink} to={RouteConstants.REGISTER}>
                   Don't have an account?
                 </Link>
@@ -118,8 +118,8 @@ const LoginScreen = (props) => {
                   Forgot password
                 </Link>
               </HStack>
-              <Box mt={7} textAlign='center'>
-                <Button type='submit' isLoading={loading}>
+              <Box mt={7} textAlign="center">
+                <Button type="submit" isLoading={loading}>
                   Sign In
                 </Button>
               </Box>

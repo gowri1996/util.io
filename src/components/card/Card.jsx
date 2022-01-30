@@ -8,7 +8,7 @@ import { useColorModeValue } from '@chakra-ui/react';
 const Card = ({ children, ...rest }) => {
   return (
     <Box
-      boxShadow='md'
+      boxShadow="md"
       borderRadius={8}
       bg={useColorModeValue('#FFFFFF', '#0E1E25')}
       {...rest}

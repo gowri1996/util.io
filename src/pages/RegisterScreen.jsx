@@ -82,14 +82,14 @@ const RegisterScreen = (props) => {
         }}
       >
         <Card p={4}>
-          <Card.Header title='Register' />
-          <Card.Content p={4} textAlign='left'>
+          <Card.Header title="Register" />
+          <Card.Content p={4} textAlign="left">
             <form onSubmit={onSubmit}>
               <FormControl isRequired>
                 <FormLabel>First Name</FormLabel>
                 <Input
-                  name='firstName'
-                  placeholder='Enter your first name'
+                  name="firstName"
+                  placeholder="Enter your first name"
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
@@ -101,8 +101,8 @@ const RegisterScreen = (props) => {
               <FormControl mt={2} isRequired>
                 <FormLabel>Last Name</FormLabel>
                 <Input
-                  name='lastName'
-                  placeholder='Enter your last name'
+                  name="lastName"
+                  placeholder="Enter your last name"
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
@@ -114,9 +114,9 @@ const RegisterScreen = (props) => {
               <FormControl mt={2} isRequired>
                 <FormLabel>Email</FormLabel>
                 <Input
-                  name='email'
-                  type='email'
-                  placeholder='Enter your email address'
+                  name="email"
+                  type="email"
+                  placeholder="Enter your email address"
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
@@ -128,9 +128,9 @@ const RegisterScreen = (props) => {
               <FormControl mt={4} isRequired>
                 <FormLabel>Password</FormLabel>
                 <Input
-                  name='password'
-                  type='password'
-                  placeholder='Enter your password'
+                  name="password"
+                  type="password"
+                  placeholder="Enter your password"
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
@@ -139,13 +139,13 @@ const RegisterScreen = (props) => {
                   }
                 />
               </FormControl>
-              <Box textAlign='left' pt={3}>
+              <Box textAlign="left" pt={3}>
                 <Link as={RouterLink} to={RouteConstants.LOGIN}>
                   Already have an account ?
                 </Link>
               </Box>
-              <Box mt={7} textAlign='center'>
-                <Button type='submit' isLoading={loading}>
+              <Box mt={7} textAlign="center">
+                <Button type="submit" isLoading={loading}>
                   Sign Up
                 </Button>
               </Box>

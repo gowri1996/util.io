@@ -79,14 +79,14 @@ const CreateUpdateTransactionModal = (props) => {
         </ModalHeader>
         <ModalCloseButton isDisabled={loading} />
         <ModalBody>
-          <Box p={4} textAlign='left'>
+          <Box p={4} textAlign="left">
             <form onSubmit={onSubmit}>
               <FormControl isRequired>
                 <FormLabel>Name</FormLabel>
                 <Input
-                  name='name'
+                  name="name"
                   value={transaction.name}
-                  placeholder='Transaction name'
+                  placeholder="Transaction name"
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
@@ -96,11 +96,11 @@ const CreateUpdateTransactionModal = (props) => {
                 />
               </FormControl>
               <FormControl mt={2} isRequired>
-                <FormLabel htmlFor='amount'>Amount</FormLabel>
-                <Stack direction='row'>
+                <FormLabel htmlFor="amount">Amount</FormLabel>
+                <Stack direction="row">
                   <Select
-                    name='type'
-                    width='150px'
+                    name="type"
+                    width="150px"
                     value={transaction.type}
                     onChange={(evt) => {
                       handleFormInputChange(
@@ -117,11 +117,11 @@ const CreateUpdateTransactionModal = (props) => {
                     </option>
                   </Select>
                   <NumberInput
-                    id='amount'
+                    id="amount"
                     min={0}
                     step={10}
                     value={transaction.amount}
-                    placeholder='Amount'
+                    placeholder="Amount"
                     color={useColorModeValue(
                       transaction.type === 'gain' ? 'green' : '#DE3737',
                       transaction.type === 'gain' ? 'green' : '#E84F4F'
@@ -139,7 +139,7 @@ const CreateUpdateTransactionModal = (props) => {
                 </Stack>
               </FormControl>
               <FormControl mt={2} isRequired>
-                <FormLabel htmlFor='category'>Category</FormLabel>
+                <FormLabel htmlFor="category">Category</FormLabel>
                 <Box
                   border={useColorModeValue(
                     '#E2E8F0',
@@ -151,10 +151,10 @@ const CreateUpdateTransactionModal = (props) => {
                   padding={4}
                 >
                   <Input
-                    id='category'
-                    name='category'
+                    id="category"
+                    name="category"
                     value={transaction.category}
-                    placeholder='Transaction Category'
+                    placeholder="Transaction Category"
                     onChange={(evt) =>
                       handleFormInputChange(
                         evt.currentTarget.name,
@@ -170,8 +170,8 @@ const CreateUpdateTransactionModal = (props) => {
               <FormControl mt={2}>
                 <FormLabel>Description</FormLabel>
                 <Textarea
-                  name='description'
-                  placeholder='Description for your transaction'
+                  name="description"
+                  placeholder="Description for your transaction"
                   value={transaction.description}
                   onChange={(evt) =>
                     handleFormInputChange(
@@ -181,16 +181,16 @@ const CreateUpdateTransactionModal = (props) => {
                   }
                 />
               </FormControl>
-              <Box mt={7} textAlign='center'>
+              <Box mt={7} textAlign="center">
                 <Button
-                  variant='danger'
+                  variant="danger"
                   mr={5}
                   onClick={onClose}
                   isDisabled={loading}
                 >
                   Close
                 </Button>
-                <Button type='submit' isLoading={loading}>
+                <Button type="submit" isLoading={loading}>
                   {data ? 'Edit' : 'Add'}
                 </Button>
               </Box>

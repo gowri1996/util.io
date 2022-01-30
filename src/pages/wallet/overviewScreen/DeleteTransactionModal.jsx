@@ -28,14 +28,14 @@ const DeleteTransactionModal = (props) => {
         <ModalHeader>Delete Transaction</ModalHeader>
         <ModalCloseButton isDisabled={loading} />
         <ModalBody>
-          <Box textAlign='left'>
+          <Box textAlign="left">
             <Text>Do you want to delete the transaction?</Text>
           </Box>
         </ModalBody>
-        <ModalFooter alignSelf='right' mb={2}>
+        <ModalFooter alignSelf="right" mb={2}>
           <Box>
             <Button
-              variant='danger'
+              variant="danger"
               mr={5}
               onClick={onClose}
               isDisabled={loading}
@@ -43,7 +43,7 @@ const DeleteTransactionModal = (props) => {
               Close
             </Button>
             <Button
-              type='submit'
+              type="submit"
               isLoading={loading}
               onClick={deleteTransaction}
             >

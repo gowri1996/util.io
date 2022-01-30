@@ -129,7 +129,7 @@ const RedirectScreen = (props) => {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return <PageLoader title='Redirecting ...' />;
+  return <PageLoader title="Redirecting ..." />;
 };
 
 export default RedirectScreen;

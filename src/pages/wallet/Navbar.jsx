@@ -27,7 +27,7 @@ const Navbar = ({ styles }) => {
   const transactions = useSelector(getAllTransactions);
 
   return (
-    <Box as='nav' bg={bgColor} {...styles}>
+    <Box as="nav" bg={bgColor} {...styles}>
       <Box
         display={{
           xs: 'none',
@@ -38,13 +38,13 @@ const Navbar = ({ styles }) => {
           xxl: 'block',
         }}
       >
-        <Stack direction='column' alignItems='flex-start' spacing='25'>
+        <Stack direction="column" alignItems="flex-start" spacing="25">
           {navLinks.map((nav) => {
             return (
               <Box
                 py={2}
                 px={2}
-                width='full'
+                width="full"
                 borderRadius={5}
                 key={nav.ROUTE}
                 as={RouterLink}
@@ -55,8 +55,8 @@ const Navbar = ({ styles }) => {
                     : undefined
                 }
               >
-                <Text float='left'>{nav.TEXT}</Text>
-                <Text float='right'>{transactions.length}</Text>
+                <Text float="left">{nav.TEXT}</Text>
+                <Text float="right">{transactions.length}</Text>
               </Box>
             );
           })}
@@ -73,13 +73,13 @@ const Navbar = ({ styles }) => {
         }}
       >
         {/* TODO Images for nav bar links */}
-        <Stack direction='column' alignItems='flex-start' spacing='25'>
+        <Stack direction="column" alignItems="flex-start" spacing="25">
           {navLinks.map((nav) => {
             return (
               <Box
                 py={2}
                 px={2}
-                width='full'
+                width="full"
                 borderRadius={5}
                 key={nav.ROUTE}
                 as={RouterLink}
@@ -90,7 +90,7 @@ const Navbar = ({ styles }) => {
                     : undefined
                 }
               >
-                <Text float='left'>{nav.SHORT_TEXT}</Text>
+                <Text float="left">{nav.SHORT_TEXT}</Text>
               </Box>
             );
           })}

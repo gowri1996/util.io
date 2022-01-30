@@ -17,7 +17,7 @@ import WalletPageSetup from './pages/wallet/WalletPageSetup';
 
 const App = () => {
   return (
-    <VStack as='main' height='100vh'>
+    <VStack as="main" height="100vh">
       <Header />
       <Routes>
         <Route
@@ -40,8 +40,8 @@ const App = () => {
           path={RouteConstants.WALLET_OVERVIEW}
           element={
             <WalletPageSetup
-              key='overview'
-              title='Wallet | Overview'
+              key="overview"
+              title="Wallet | Overview"
               component={<OverviewScreen />}
             />
           }
@@ -50,13 +50,13 @@ const App = () => {
           path={RouteConstants.WALLET_ANALYTICS}
           element={
             <WalletPageSetup
-              key='analytics'
-              title='Wallet | Analytics'
+              key="analytics"
+              title="Wallet | Analytics"
               component={<AnalyticsScreen />}
             />
           }
         />
-        <Route exact path='*' element={<NotFoundScreen />} />
+        <Route exact path="*" element={<NotFoundScreen />} />
       </Routes>
     </VStack>
   );
