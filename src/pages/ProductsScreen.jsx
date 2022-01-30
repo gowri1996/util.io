@@ -39,6 +39,7 @@ const ProductsScreen = (props) => {
         >
           {[
             <Flex
+              key={RouteConstants.WALLET_BASE}
               flexDirection={'column'}
               alignItems={'center'}
               justifyContent={'center'}
@@ -48,7 +49,7 @@ const ProductsScreen = (props) => {
               borderStyle={'solid'}
               boxShadow={'lg'}
               as={RouterLink}
-              to={RouteConstants.WALLET_OVERVIEW}
+              to={RouteConstants.WALLET_BASE}
             >
               <IconButton
                 h={75}

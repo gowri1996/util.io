@@ -53,6 +53,22 @@ export const forgotPassword = createAsyncThunk(
   }
 );
 
+export const updateUser = createAsyncThunk(
+  'user/update',
+  async (request, { getState, rejectWithValue }) => {
+    try {
+      const user = getState().user;
+      const response = await Service.updateUser({
+        token: user.token,
+        user: request,
+      });
+      return response;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const getUserFromToken = createAsyncThunk(
   'user/details',
   async (token, { rejectWithValue }) => {
@@ -77,7 +93,7 @@ export const refreshTokens = createAsyncThunk(
   }
 );
 
-const resetUser = () => {
+const getInitialState = () => {
   return {
     _id: null,
     firstName: null,
@@ -85,7 +101,14 @@ const resetUser = () => {
     email: null,
     token: null,
     refreshToken: null,
+    createdAt: null,
+    updatedAt: null,
+    currency: null,
   };
+};
+
+const resetUser = () => {
+  return getInitialState();
 };
 
 const setUser = (state, action) => {
@@ -94,18 +117,12 @@ const setUser = (state, action) => {
 
 const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    _id: null,
-    firstName: null,
-    lastName: null,
-    email: null,
-    token: null,
-    refreshToken: null,
-  },
+  initialState: getInitialState(),
   reducers: {},
   extraReducers(builder) {
     builder
       .addCase(logout.fulfilled, resetUser)
+      .addCase(updateUser.fulfilled, setUser)
       .addCase(getUserFromToken.fulfilled, setUser)
       .addCase(refreshTokens.fulfilled, setUser);
   },

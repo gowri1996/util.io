@@ -14,6 +14,7 @@ import RegisterScreen from './pages/RegisterScreen';
 import RouteConstants from './constants/RouteConstants';
 import { VStack } from '@chakra-ui/react';
 import WalletPageSetup from './pages/wallet/WalletPageSetup';
+import UserSettings from './pages/user-settings';
 
 const App = () => {
   return (
@@ -56,6 +57,11 @@ const App = () => {
             />
           }
         />
+        <Route
+          path={RouteConstants.USER_BASE}
+          element={<Navigate replace to={RouteConstants.USER_SETTINGS} />}
+        />
+        <Route path={RouteConstants.USER_SETTINGS} element={<UserSettings />} />
         <Route exact path="*" element={<NotFoundScreen />} />
       </Routes>
     </VStack>

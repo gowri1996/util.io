@@ -10,6 +10,8 @@ const routes = {
   WALLET_BASE: appBase + 'wallet',
   WALLET_OVERVIEW: appBase + 'wallet/overview',
   WALLET_ANALYTICS: appBase + 'wallet/analytics',
+  USER_BASE: appBase + 'user',
+  USER_SETTINGS: appBase + 'user/settings',
 };
 
 export default routes;

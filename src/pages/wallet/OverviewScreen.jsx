@@ -165,10 +165,11 @@ const OverviewScreen = (props) => {
                 xs: 'full',
                 sm: 'calc(calc((100% / 2)) - 20px)',
                 xl: 'calc(calc((100% / 3)) - 20px)',
-                xxl: 'calc(calc((100% / 3)) - 20px)',
+                '2xl': 'calc(calc((100% / 3)) - 20px)',
               }}
             >
               <TransactionCard
+                currency={user.currency ? user.currency : ''}
                 data={transaction}
                 width="full"
                 onUpdateTransactionClick={setupUpdate}

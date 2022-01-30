@@ -1,20 +1,21 @@
 import {
+  Avatar,
   Box,
   Button,
   Flex,
-  Icon,
   IconButton,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
   Spacer,
+  Text,
   Tooltip,
   useColorMode,
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react';
-import { FaHourglassEnd, FaMapSigns, FaMoon, FaSun } from 'react-icons/fa';
+import { FaHourglassEnd, FaMoon, FaSun } from 'react-icons/fa';
 import React, { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { getUser, logout } from '../app/slices/userSlice';
@@ -50,6 +51,10 @@ const Header = () => {
       );
       setLoading(false);
     }
+  };
+
+  const goToUserSettings = () => {
+    navigate(RouteConstants.USER_SETTINGS);
   };
 
   return (
@@ -100,20 +105,37 @@ const Header = () => {
           </Tooltip>
           {!isEmpty(user._id) && (
             <Menu>
-              <Tooltip label="Actions" fontSize="xs" placement="left">
-                <MenuButton
-                  mt={2}
-                  size="md"
-                  variant="header-menu-icon"
-                  as={Button}
-                  aria-label="actions"
-                  isLoading={loading}
-                >
-                  <Icon as={FaMapSigns} />
-                </MenuButton>
-              </Tooltip>
-              <MenuList>
-                <MenuItem onClick={onLogout}>Logout</MenuItem>
+              <MenuButton
+                mt={2}
+                size="md"
+                variant="header-menu-icon"
+                as={Button}
+                aria-label="actions"
+                isLoading={loading}
+              >
+                <Avatar
+                  name={`${user.firstName} ${user.lastName}`}
+                  size="xs"
+                  src=""
+                />
+              </MenuButton>
+              <MenuList py={4}>
+                <MenuItem onClick={goToUserSettings}>
+                  <Box>
+                    <Text fontWeight={500}>
+                      {`${user.firstName} ${user.lastName}`}
+                    </Text>
+                    <Text fontSize={'sm'} color="gray.500">
+                      {user.email}
+                    </Text>
+                  </Box>
+                </MenuItem>
+                <MenuItem onClick={goToUserSettings}>
+                  <Text fontWeight={500}>User settings</Text>
+                </MenuItem>
+                <MenuItem onClick={onLogout}>
+                  <Text fontWeight={500}>Sign Out</Text>
+                </MenuItem>
               </MenuList>
             </Menu>
           )}

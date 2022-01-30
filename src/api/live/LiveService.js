@@ -16,6 +16,12 @@ const resetPasswordUserService = (request) => {
   });
 };
 
+const updateUser = (request) => {
+  return new Promise((resolve, reject) => {
+    resolve(request);
+  });
+};
+
 const getUserFullDetails = (token) => {
   return new Promise((resolve, reject) => {
     resolve();
@@ -65,6 +71,7 @@ const exportData = {
   getUserFullDetails,
   refreshTokens,
   logoutUser,
+  updateUser,
 
   createTransaction,
   deleteTransaction,

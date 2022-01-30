@@ -25,7 +25,7 @@ const TransactionCard = (props) => {
         <Card.Property label="Category" value={data.category} />
         <Card.Property
           label="Amount"
-          value={data.amount}
+          value={`${props.currency} ${data.amount}`}
           valueColor={useColorModeValue(
             data.type === 'gain' ? 'green' : '#DE3737',
             data.type === 'gain' ? 'green' : '#E84F4F'

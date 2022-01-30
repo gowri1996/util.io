@@ -1,4 +1,4 @@
-import { Box, Divider, Flex, Text, Tooltip } from '@chakra-ui/react';
+import { Box, Flex, Text, Tooltip, useColorModeValue } from '@chakra-ui/react';
 
 import React from 'react';
 
@@ -7,31 +7,36 @@ const CardProperty = ({
   value,
   useTooltip,
   valueColor,
+  custom,
   ...flexProps
 }) => {
   return (
-    <Box>
-      <Flex direction={{ base: 'row' }} px="1" py="2" {...flexProps}>
-        <Box minW="100">
-          <Text fontSize="sm">{label}</Text>
-        </Box>
-        <Divider orientation="vertical" h="20px" />
-        <Box ml={2} width="calc(100% - 102px)">
-          {useTooltip ? (
-            <Tooltip label={value} fontSize="xs" placement="top">
-              <Text fontSize="sm" isTruncated color={valueColor}>
-                {value}
-              </Text>
-            </Tooltip>
-          ) : (
-            <Text fontSize="sm" isTruncated color={valueColor}>
+    <Flex
+      as="dl"
+      direction={{ base: 'column', sm: 'row' }}
+      py="4"
+      _even={{ bg: useColorModeValue('#FBFCFC', '#18272D') }}
+      {...flexProps}
+    >
+      <Box as="dt" ml="10px" width="250px">
+        {label}
+      </Box>
+      <Box as="dd" flex="1" fontWeight="semibold" mr="10px">
+        {custom ? (
+          <>{custom}</>
+        ) : useTooltip ? (
+          <Tooltip label={value} fontSize="xs" placement="top">
+            <Text fontSize={'md'} color={valueColor}>
               {value}
             </Text>
-          )}
-        </Box>
-      </Flex>
-      <Divider />
-    </Box>
+          </Tooltip>
+        ) : (
+          <Text fontSize={'md'} color={valueColor}>
+            {value}
+          </Text>
+        )}
+      </Box>
+    </Flex>
   );
 };
 

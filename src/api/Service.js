@@ -24,6 +24,10 @@ const resetPasswordUserService = (request) => {
   return service.resetPasswordUserService(request);
 };
 
+const updateUser = (request) => {
+  return service.updateUser(request);
+};
+
 const getUserFullDetails = (token) => {
   return service.getUserFullDetails(token);
 };
@@ -61,6 +65,7 @@ const exportData = {
   getUserFullDetails,
   refreshTokens,
   logoutUser,
+  updateUser,
 
   createTransaction,
   deleteTransaction,

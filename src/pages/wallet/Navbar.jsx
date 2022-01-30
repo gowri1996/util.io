@@ -35,7 +35,7 @@ const Navbar = ({ styles }) => {
           md: 'none',
           lg: 'none',
           xl: 'none',
-          xxl: 'block',
+          '2xl': 'block',
         }}
       >
         <Stack direction="column" alignItems="flex-start" spacing="25">
@@ -69,7 +69,7 @@ const Navbar = ({ styles }) => {
           md: 'block',
           lg: 'block',
           xl: 'block',
-          xxl: 'none',
+          '2xl': 'none',
         }}
       >
         {/* TODO Images for nav bar links */}

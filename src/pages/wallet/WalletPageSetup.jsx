@@ -22,7 +22,7 @@ const WalletPageSetup = ({ title, component }) => {
     overflowY: 'auto',
     width: {
       xs: '100px',
-      xxl: '250px',
+      '2xl': '250px',
     },
     height: 'full',
   };
@@ -54,7 +54,7 @@ const WalletPageSetup = ({ title, component }) => {
           style={{ margin: '0px' }}
           width={{
             xs: 'calc(100% - 100px)',
-            xxl: 'calc(100% - 250px)',
+            '2xl': 'calc(100% - 250px)',
           }}
           height="full"
         >

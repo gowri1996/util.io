@@ -74,7 +74,7 @@ const ForgotPasswordScreen = (props) => {
           md: '50%',
           lg: '40%',
           xl: '40%',
-          xxl: '35%',
+          '2xl': '35%',
         }}
       >
         <Card p={4}>

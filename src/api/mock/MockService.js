@@ -47,6 +47,8 @@ const registerUserService = (request) => {
           transactions: [],
           token: null,
           refreshToken: null,
+          createdAt: new Date().toString(),
+          currency: null,
         };
         user.password = generateHashPassword(request.password);
 
@@ -144,6 +146,46 @@ const resetPasswordUserService = (request) => {
   });
 };
 
+const updateUser = (request) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        let localUsers = JSON.parse(localStorage.getItem('users'));
+        if (!Array.isArray(localUsers)) {
+          reject({ message: 'Invalid. Try again later', status: 400 });
+          return;
+        }
+
+        const token = request.token;
+        const user = localUsers.find((localUser) => localUser.token === token);
+        if (isEmpty(user)) {
+          reject({ message: 'Invalid credentials', status: 400 });
+          return;
+        }
+
+        if (!isTokenValid(token)) {
+          reject({ message: 'Token Expired', status: 401 });
+          return;
+        }
+
+        Object.keys(request.user).forEach((key) => {
+          user[key] = request.user[key];
+        });
+        user.updatedAt = new Date().toString();
+        localStorage.setItem('users', JSON.stringify(localUsers));
+
+        resolve({
+          status: 200,
+          message: 'User updated successfully',
+          data: user,
+        });
+      } catch (err) {
+        reject(err);
+      }
+    }, timeout);
+  });
+};
+
 const getUserFullDetails = (token) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -172,6 +214,8 @@ const getUserFullDetails = (token) => {
           email: user.email,
           token: user.token,
           refreshToken: user.refreshToken,
+          createdAt: user.createdAt,
+          currency: user.currency,
         };
 
         resolve({
@@ -234,6 +278,8 @@ const refreshTokens = (refreshToken) => {
           email: user.email,
           token: user.token,
           refreshToken: user.refreshToken,
+          createdAt: user.createdAt,
+          currency: user.currency,
         };
         resolve({
           status: 200,
@@ -459,6 +505,7 @@ const exportData = {
   getUserFullDetails,
   refreshTokens,
   logoutUser,
+  updateUser,
 
   createTransaction,
   deleteTransaction,

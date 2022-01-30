@@ -24,5 +24,5 @@ export default extendTheme({
     Textarea: textarea,
     Select: select,
   },
-  config: { useSystemColorMode: false },
+  config: { useSystemColorMode: false, initialColorMode: 'light' },
 });
