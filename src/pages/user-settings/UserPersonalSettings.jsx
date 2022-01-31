@@ -5,13 +5,14 @@ import {
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react';
-import isEmpty from 'lodash.isempty';
 import React, { useEffect, useState } from 'react';
+import { getUser, updateUser } from '../../app/slices/userSlice';
+
+import AppUtils from '../../utils/AppUtils';
+import Card from '../../components/card/Card';
+import isEmpty from 'lodash.isempty';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { getUser, updateUser } from '../../app/slices/userSlice';
-import Card from '../../components/card/Card';
-import AppUtils from '../../utils/AppUtils';
 
 const UserPersonalSettings = (props) => {
   const user = useSelector(getUser);
@@ -76,8 +77,7 @@ const UserPersonalSettings = (props) => {
       <Card.Content p={4}>
         <Card.Property
           label="First name"
-          value={user.firstName}
-          custom={
+          value={
             editMode ? (
               <Input
                 defaultValue={user.firstName}
@@ -91,13 +91,14 @@ const UserPersonalSettings = (props) => {
                   }));
                 }}
               />
-            ) : null
+            ) : (
+              user.firstName
+            )
           }
         />
         <Card.Property
           label="Last name"
-          value={user.lastName}
-          custom={
+          value={
             editMode ? (
               <Input
                 defaultValue={user.lastName}
@@ -111,7 +112,9 @@ const UserPersonalSettings = (props) => {
                   }));
                 }}
               />
-            ) : null
+            ) : (
+              user.lastName
+            )
           }
         />
         <Card.Property label="Email" value={user.email} />

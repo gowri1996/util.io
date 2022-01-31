@@ -8,8 +8,8 @@ const routes = {
   PRODUCTS: appBase + 'products',
   REDIRECT: appBase + 'redirect',
   WALLET_BASE: appBase + 'wallet',
-  WALLET_OVERVIEW: appBase + 'wallet/overview',
-  WALLET_ANALYTICS: appBase + 'wallet/analytics',
+  WALLET_TRANSACTIONS: appBase + 'wallet/transactions',
+  WALLET_DASHBOARD: appBase + 'wallet/dashboard',
   USER_BASE: appBase + 'user',
   USER_SETTINGS: appBase + 'user/settings',
 };

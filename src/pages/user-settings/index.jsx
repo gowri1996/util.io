@@ -1,9 +1,10 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
-import React from 'react';
-import secureComponent from '../../components/SecureComponent';
+
 import AdditionalUserInformationSettings from './AdditionalUserInformationSettings';
+import React from 'react';
 import UserBaseInfo from './UserBaseInfo';
 import UserPersonalSettings from './UserPersonalSettings';
+import secureComponent from '../../components/SecureComponent';
 
 const UserSettings = (props) => {
   return (
@@ -11,7 +12,7 @@ const UserSettings = (props) => {
       <SimpleGrid width={{ xs: '100%', lg: '50%' }}>
         <UserBaseInfo />
       </SimpleGrid>
-      <SimpleGrid mt={'50px'} columns={{ xs: 1, lg: 2 }} gap={4}>
+      <SimpleGrid mt={'25px'} columns={{ xs: 1, lg: 2 }} gap={4}>
         <Box w="100%">{<UserPersonalSettings />}</Box>
         <Box w="100%">{<AdditionalUserInformationSettings />}</Box>
       </SimpleGrid>

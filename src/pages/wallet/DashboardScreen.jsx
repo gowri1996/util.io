@@ -2,14 +2,14 @@ import { Box, Heading } from '@chakra-ui/react';
 
 import React from 'react';
 
-const AnalyticsScreen = (props) => {
+const DashboardScreen = (props) => {
   return (
     <Box>
       <Heading fontWeight={300} letterSpacing={0.5}>
-        Analytics
+        Dashboard
       </Heading>
     </Box>
   );
 };
 
-export default AnalyticsScreen;
+export default DashboardScreen;

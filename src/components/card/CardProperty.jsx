@@ -1,15 +1,8 @@
-import { Box, Flex, Text, Tooltip, useColorModeValue } from '@chakra-ui/react';
+import { Box, Flex, useColorModeValue } from '@chakra-ui/react';
 
 import React from 'react';
 
-const CardProperty = ({
-  label,
-  value,
-  useTooltip,
-  valueColor,
-  custom,
-  ...flexProps
-}) => {
+const CardProperty = ({ label, value, ...flexProps }) => {
   return (
     <Flex
       as="dl"
@@ -22,19 +15,7 @@ const CardProperty = ({
         {label}
       </Box>
       <Box as="dd" flex="1" fontWeight="semibold" mr="10px">
-        {custom ? (
-          <>{custom}</>
-        ) : useTooltip ? (
-          <Tooltip label={value} fontSize="xs" placement="top">
-            <Text fontSize={'md'} color={valueColor}>
-              {value}
-            </Text>
-          </Tooltip>
-        ) : (
-          <Text fontSize={'md'} color={valueColor}>
-            {value}
-          </Text>
-        )}
+        {value}
       </Box>
     </Flex>
   );

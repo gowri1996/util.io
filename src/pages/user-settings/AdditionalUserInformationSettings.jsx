@@ -5,12 +5,13 @@ import {
   useColorModeValue,
   useToast,
 } from '@chakra-ui/react';
-import isEmpty from 'lodash.isempty';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { getUser, updateUser } from '../../app/slices/userSlice';
-import Card from '../../components/card/Card';
+import { useDispatch, useSelector } from 'react-redux';
+
 import AppUtils from '../../utils/AppUtils';
+import Card from '../../components/card/Card';
+import isEmpty from 'lodash.isempty';
 
 const AdditionalUserInformationSettings = (props) => {
   const user = useSelector(getUser);
@@ -67,8 +68,7 @@ const AdditionalUserInformationSettings = (props) => {
       <Card.Content p={4}>
         <Card.Property
           label="Currency"
-          value={user.currency}
-          custom={
+          value={
             editMode ? (
               <Input
                 defaultValue={user.currency}
@@ -82,7 +82,9 @@ const AdditionalUserInformationSettings = (props) => {
                   }));
                 }}
               />
-            ) : null
+            ) : (
+              user.currency
+            )
           }
         />
         {!editMode ? (

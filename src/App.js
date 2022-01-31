@@ -2,19 +2,19 @@ import './App.css';
 
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import AnalyticsScreen from './pages/wallet/AnalyticsScreen';
+import DashboardScreen from './pages/wallet/DashboardScreen';
 import ForgotPasswordScreen from './pages/ForgotPasswordScreen';
 import Header from './components/Header';
 import LoginScreen from './pages/LoginScreen';
 import NotFoundScreen from './pages/NotFoundScreen';
-import OverviewScreen from './pages/wallet/OverviewScreen';
 import ProductsScreen from './pages/ProductsScreen';
 import RedirectScreen from './pages/RedirectScreen';
 import RegisterScreen from './pages/RegisterScreen';
 import RouteConstants from './constants/RouteConstants';
+import TransactionScreen from './pages/wallet/TransactionScreen';
+import UserSettings from './pages/user-settings';
 import { VStack } from '@chakra-ui/react';
 import WalletPageSetup from './pages/wallet/WalletPageSetup';
-import UserSettings from './pages/user-settings';
 
 const App = () => {
   return (
@@ -35,25 +35,25 @@ const App = () => {
         <Route path={RouteConstants.PRODUCTS} element={<ProductsScreen />} />
         <Route
           path={RouteConstants.WALLET_BASE}
-          element={<Navigate replace to={RouteConstants.WALLET_OVERVIEW} />}
+          element={<Navigate replace to={RouteConstants.WALLET_TRANSACTIONS} />}
         />
         <Route
-          path={RouteConstants.WALLET_OVERVIEW}
+          path={RouteConstants.WALLET_DASHBOARD}
           element={
             <WalletPageSetup
-              key="overview"
-              title="Wallet | Overview"
-              component={<OverviewScreen />}
+              key="dashboard"
+              title="Wallet | Dashboard"
+              component={<DashboardScreen />}
             />
           }
         />
         <Route
-          path={RouteConstants.WALLET_ANALYTICS}
+          path={RouteConstants.WALLET_TRANSACTIONS}
           element={
             <WalletPageSetup
-              key="analytics"
-              title="Wallet | Analytics"
-              component={<AnalyticsScreen />}
+              key="transactions"
+              title="Wallet | Transactions"
+              component={<TransactionScreen />}
             />
           }
         />

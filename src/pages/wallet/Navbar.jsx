@@ -1,4 +1,12 @@
-import { Box, Stack, Text, useColorModeValue } from '@chakra-ui/react';
+import {
+  Box,
+  IconButton,
+  Stack,
+  Text,
+  Tooltip,
+  useColorModeValue,
+} from '@chakra-ui/react';
+import { FaChartArea, FaTable } from 'react-icons/fa';
 
 import React from 'react';
 import RouteConstants from '../../constants/RouteConstants';
@@ -9,14 +17,16 @@ import { useSelector } from 'react-redux';
 
 const navLinks = [
   {
-    ROUTE: RouteConstants.WALLET_OVERVIEW,
-    TEXT: 'Overview',
-    SHORT_TEXT: 'O',
+    ROUTE: RouteConstants.WALLET_DASHBOARD,
+    TEXT: 'Dashboard',
+    IMAGE: <FaChartArea color="#00FF00" />,
+    SHOW_TRANSACTIONS_COUNT: false,
   },
   {
-    ROUTE: RouteConstants.WALLET_ANALYTICS,
-    TEXT: 'Analytics',
-    SHORT_TEXT: 'A',
+    ROUTE: RouteConstants.WALLET_TRANSACTIONS,
+    TEXT: 'Transactions',
+    IMAGE: <FaTable color="#00FF00" />,
+    SHOW_TRANSACTIONS_COUNT: true,
   },
 ];
 
@@ -56,7 +66,9 @@ const Navbar = ({ styles }) => {
                 }
               >
                 <Text float="left">{nav.TEXT}</Text>
-                <Text float="right">{transactions.length}</Text>
+                {nav.SHOW_TRANSACTIONS_COUNT && (
+                  <Text float="right">{transactions.length}</Text>
+                )}
               </Box>
             );
           })}
@@ -90,7 +102,9 @@ const Navbar = ({ styles }) => {
                     : undefined
                 }
               >
-                <Text float="left">{nav.SHORT_TEXT}</Text>
+                <Tooltip label={nav.TEXT} fontSize="xs" placement="right">
+                  <IconButton variant={'icon'}>{nav.IMAGE}</IconButton>
+                </Tooltip>
               </Box>
             );
           })}

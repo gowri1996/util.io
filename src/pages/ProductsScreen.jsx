@@ -29,7 +29,8 @@ const ProductsScreen = (props) => {
           mt={50}
           height={'50%'}
           width={'50%'}
-          border={useColorModeValue('#084157', '#0E1E25')}
+          bg={useColorModeValue('#FFFFFF', '#141414')}
+          border={useColorModeValue('#FFFFFF', '#141414')}
           borderRadius={20}
           borderStyle={'solid'}
           justifyContent={'center'}
@@ -44,7 +45,7 @@ const ProductsScreen = (props) => {
               alignItems={'center'}
               justifyContent={'center'}
               p={4}
-              border={useColorModeValue('#084157', '#0E1E25')}
+              border={useColorModeValue('#FFFFFF', '#141414')}
               borderRadius={20}
               borderStyle={'solid'}
               boxShadow={'lg'}
