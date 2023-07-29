@@ -14,6 +14,7 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 import { register } from "../app/slices/userSlice";
 import Card from "../components/card/Card";
+import unsecureComponent from "../components/UnsecureComponent";
 import RouteConstants from "../constants/RouteConstants";
 import AppUtils from "../utils/AppUtils";
 
@@ -157,4 +158,4 @@ const RegisterScreen = () => {
   );
 };
 
-export default RegisterScreen;
+export default unsecureComponent(RegisterScreen);

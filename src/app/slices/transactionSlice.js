@@ -27,7 +27,7 @@ export const createTransaction = createAsyncThunk(
         transaction,
         token: user.token,
       });
-      //response.data.userId = user._id; // addinjg userId to each transaction for mapping, if needed
+      //response.data.userId = user._id; // adding userId to each transaction for mapping, if needed
       return response;
     } catch (error) {
       return rejectWithValue(error);
@@ -44,7 +44,7 @@ export const updateTransaction = createAsyncThunk(
         ...request,
         token: user.token,
       });
-      //response.data.userId = user._id; // addinjg userId to each transaction for mapping, if needed
+      //response.data.userId = user._id; // adding userId to each transaction for mapping, if needed
       return response;
     } catch (error) {
       return rejectWithValue(error);

@@ -33,7 +33,7 @@ const WalletPageSetup = ({ title, component }) => {
     return () => {
       promise.abort();
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   return (
     <>
