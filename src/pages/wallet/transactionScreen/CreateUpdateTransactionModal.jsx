@@ -20,18 +20,18 @@ import {
   Stack,
   Textarea,
   useColorModeValue,
-} from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 
 const CreateUpdateTransactionModal = (props) => {
   const { data, visible, loading, handleSubmit, onClose } = props;
 
   const [transaction, setTransaction] = useState({
-    name: '',
-    type: 'gain',
+    name: "",
+    type: "gain",
     amount: 0,
-    category: '',
-    description: '',
+    category: "",
+    description: "",
   });
 
   useEffect(() => {
@@ -47,11 +47,11 @@ const CreateUpdateTransactionModal = (props) => {
       }
     } else {
       setTransaction({
-        name: '',
-        type: 'gain',
+        name: "",
+        type: "gain",
         amount: 0,
-        category: '',
-        description: '',
+        category: "",
+        description: "",
       });
     }
   }, [visible]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -75,7 +75,7 @@ const CreateUpdateTransactionModal = (props) => {
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>
-          {data ? 'Edit Transaction' : 'Add Transaction'}
+          {data ? "Edit Transaction" : "Add Transaction"}
         </ModalHeader>
         <ModalCloseButton isDisabled={loading} />
         <ModalBody>
@@ -90,7 +90,7 @@ const CreateUpdateTransactionModal = (props) => {
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
-                      evt.currentTarget.value
+                      evt.currentTarget.value,
                     )
                   }
                 />
@@ -105,14 +105,14 @@ const CreateUpdateTransactionModal = (props) => {
                     onChange={(evt) => {
                       handleFormInputChange(
                         evt.currentTarget.name,
-                        evt.currentTarget.value
+                        evt.currentTarget.value,
                       );
                     }}
                   >
-                    <option key={'gain'} value={'gain'}>
+                    <option key={"gain"} value={"gain"}>
                       Gain
                     </option>
-                    <option key={'loss'} value={'loss'}>
+                    <option key={"loss"} value={"loss"}>
                       Loss
                     </option>
                   </Select>
@@ -123,11 +123,11 @@ const CreateUpdateTransactionModal = (props) => {
                     value={transaction.amount}
                     placeholder="Amount"
                     color={useColorModeValue(
-                      transaction.type === 'gain' ? 'green' : '#DE3737',
-                      transaction.type === 'gain' ? 'green' : '#E84F4F'
+                      transaction.type === "gain" ? "green" : "#DE3737",
+                      transaction.type === "gain" ? "green" : "#E84F4F",
                     )}
                     onChange={(value) => {
-                      handleFormInputChange('amount', Number(value));
+                      handleFormInputChange("amount", Number(value));
                     }}
                   >
                     <NumberInputField />
@@ -142,12 +142,12 @@ const CreateUpdateTransactionModal = (props) => {
                 <FormLabel htmlFor="category">Category</FormLabel>
                 <Box
                   border={useColorModeValue(
-                    '#E2E8F0',
-                    'rgba(255, 255, 255, 0.16)'
+                    "#E2E8F0",
+                    "rgba(255, 255, 255, 0.16)",
                   )}
                   borderWidth={1}
                   borderRadius={10}
-                  borderStyle={'solid'}
+                  borderStyle={"solid"}
                   padding={4}
                 >
                   <Input
@@ -158,7 +158,7 @@ const CreateUpdateTransactionModal = (props) => {
                     onChange={(evt) =>
                       handleFormInputChange(
                         evt.currentTarget.name,
-                        evt.currentTarget.value
+                        evt.currentTarget.value,
                       )
                     }
                   />
@@ -176,7 +176,7 @@ const CreateUpdateTransactionModal = (props) => {
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
-                      evt.currentTarget.value
+                      evt.currentTarget.value,
                     )
                   }
                 />
@@ -191,7 +191,7 @@ const CreateUpdateTransactionModal = (props) => {
                   Close
                 </Button>
                 <Button type="submit" isLoading={loading}>
-                  {data ? 'Edit' : 'Add'}
+                  {data ? "Edit" : "Add"}
                 </Button>
               </Box>
             </form>

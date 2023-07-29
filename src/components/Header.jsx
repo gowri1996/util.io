@@ -14,17 +14,17 @@ import {
   useColorMode,
   useColorModeValue,
   useToast,
-} from '@chakra-ui/react';
-import { FaHourglassEnd, FaMoon, FaSun } from 'react-icons/fa';
-import React, { useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { getUser, logout } from '../app/slices/userSlice';
-import { useDispatch, useSelector } from 'react-redux';
+} from "@chakra-ui/react";
+import isEmpty from "lodash.isempty";
+import { useState } from "react";
+import { FaHourglassEnd, FaMoon, FaSun } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
-import AppUtils from '../utils/AppUtils';
-import RouteConstants from '../constants/RouteConstants';
-import { deleteToken } from '../utils/AuthUtils';
-import isEmpty from 'lodash.isempty';
+import { getUser, logout } from "../app/slices/userSlice";
+import RouteConstants from "../constants/RouteConstants";
+import AppUtils from "../utils/AppUtils";
+import { deleteToken } from "../utils/AuthUtils";
 
 const Header = () => {
   const { toggleColorMode } = useColorMode();
@@ -45,9 +45,9 @@ const Header = () => {
     } catch (error) {
       toast(
         AppUtils.errorToastMessage({
-          title: 'User could not be logged out',
+          title: "User could not be logged out",
           description: error.message,
-        })
+        }),
       );
       setLoading(false);
     }
@@ -63,10 +63,10 @@ const Header = () => {
       height="50px"
       width="full"
       position="sticky"
-      backgroundColor={useColorModeValue('#021117', '#0E1E25')}
+      backgroundColor={useColorModeValue("#021117", "#0E1E25")}
       top={0}
       zIndex={1}
-      boxShadow={'md'}
+      boxShadow={"md"}
     >
       <Flex>
         <Box>
@@ -96,7 +96,7 @@ const Header = () => {
               aria-label="theme-icon"
               icon={useColorModeValue(
                 <FaSun color="#FFA500" />,
-                <FaMoon color="#808080" />
+                <FaMoon color="#808080" />,
               )}
               onClick={() => {
                 toggleColorMode();
@@ -125,7 +125,7 @@ const Header = () => {
                     <Text fontWeight={500}>
                       {`${user.firstName} ${user.lastName}`}
                     </Text>
-                    <Text fontSize={'sm'} color="gray.500">
+                    <Text fontSize={"sm"} color="gray.500">
                       {user.email}
                     </Text>
                   </Box>

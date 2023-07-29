@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars*/
+
 const registerUserService = (request) => {
   return new Promise((resolve, reject) => {
     resolve(request);

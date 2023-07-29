@@ -1,11 +1,11 @@
-import { mode } from '@chakra-ui/theme-tools';
+import { mode } from "@chakra-ui/theme-tools";
 
 const button = {
   variants: {
     solid: (props) => {
-      const bg = mode('#15847B', '#0BCBBB')(props);
-      const hoverBg = mode('#0A423E', '#9EFAF2')(props);
-      const color = mode('#FFFFFF', '#083532')(props);
+      const bg = mode("#15847B", "#0BCBBB")(props);
+      const hoverBg = mode("#0A423E", "#9EFAF2")(props);
+      const color = mode("#FFFFFF", "#083532")(props);
       return {
         bg,
         _active: {
@@ -32,9 +32,9 @@ const button = {
       };
     },
     danger: (props) => {
-      const bg = mode('#DE3737', '#E84F4F')(props);
-      const hoverBg = mode('#611D1D', '#EB7F7F')(props);
-      const color = mode('#FFFFFF', '#083532')(props);
+      const bg = mode("#DE3737", "#E84F4F")(props);
+      const hoverBg = mode("#611D1D", "#EB7F7F")(props);
+      const color = mode("#FFFFFF", "#083532")(props);
       return {
         bg,
         _active: {
@@ -60,23 +60,23 @@ const button = {
         color,
       };
     },
-    icon: (props) => {
+    icon: () => {
       return {
-        bg: 'transparent',
+        bg: "transparent",
         _focus: {
-          borderColor: 'transparent',
-          boxShadow: '0 0 0 1px transparent',
+          borderColor: "transparent",
+          boxShadow: "0 0 0 1px transparent",
         },
       };
     },
-    'header-menu-icon': (props) => {
+    "header-menu-icon": () => {
       return {
-        bg: 'transparent',
+        bg: "transparent",
         _focus: {
-          borderColor: 'transparent',
-          boxShadow: '0 0 0 1px transparent',
+          borderColor: "transparent",
+          boxShadow: "0 0 0 1px transparent",
         },
-        color: '#FFFFFF',
+        color: "#FFFFFF",
       };
     },
   },

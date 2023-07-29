@@ -1,10 +1,10 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import Service from '../../api/Service';
-import { resetTransaction } from './transactionSlice';
+import { resetTransaction } from "./transactionSlice";
+import Service from "../../api/Service";
 
 export const logout = createAsyncThunk(
-  'user/logout',
+  "user/logout",
   async (_, { getState, dispatch, rejectWithValue }) => {
     try {
       const user = getState().user;
@@ -14,11 +14,11 @@ export const logout = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const login = createAsyncThunk(
-  'user/login',
+  "user/login",
   async (request, { rejectWithValue }) => {
     try {
       const response = await Service.loginUserService(request);
@@ -26,11 +26,11 @@ export const login = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const register = createAsyncThunk(
-  'user/register',
+  "user/register",
   async (request, { rejectWithValue }) => {
     try {
       const response = await Service.registerUserService(request);
@@ -38,11 +38,11 @@ export const register = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const forgotPassword = createAsyncThunk(
-  'user/forgot-password',
+  "user/forgot-password",
   async (request, { rejectWithValue }) => {
     try {
       const response = await Service.resetPasswordUserService(request);
@@ -50,11 +50,11 @@ export const forgotPassword = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const updateUser = createAsyncThunk(
-  'user/update',
+  "user/update",
   async (request, { getState, rejectWithValue }) => {
     try {
       const user = getState().user;
@@ -66,11 +66,11 @@ export const updateUser = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const getUserFromToken = createAsyncThunk(
-  'user/details',
+  "user/details",
   async (token, { rejectWithValue }) => {
     try {
       const response = await Service.getUserFullDetails(token);
@@ -78,11 +78,11 @@ export const getUserFromToken = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const refreshTokens = createAsyncThunk(
-  'user/refresh-tokens',
+  "user/refresh-tokens",
   async (refreshToken, { rejectWithValue }) => {
     try {
       const response = await Service.refreshTokens(refreshToken);
@@ -90,7 +90,7 @@ export const refreshTokens = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 const getInitialState = () => {
@@ -116,7 +116,7 @@ const setUser = (state, action) => {
 };
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState: getInitialState(),
   reducers: {},
   extraReducers(builder) {

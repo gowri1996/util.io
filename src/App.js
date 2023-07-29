@@ -1,20 +1,20 @@
-import './App.css';
+import "./App.css";
 
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { VStack } from "@chakra-ui/react";
+import { Navigate, Route, Routes } from "react-router-dom";
 
-import DashboardScreen from './pages/wallet/DashboardScreen';
-import ForgotPasswordScreen from './pages/ForgotPasswordScreen';
-import Header from './components/Header';
-import LoginScreen from './pages/LoginScreen';
-import NotFoundScreen from './pages/NotFoundScreen';
-import ProductsScreen from './pages/ProductsScreen';
-import RedirectScreen from './pages/RedirectScreen';
-import RegisterScreen from './pages/RegisterScreen';
-import RouteConstants from './constants/RouteConstants';
-import TransactionScreen from './pages/wallet/TransactionScreen';
-import UserSettings from './pages/user-settings';
-import { VStack } from '@chakra-ui/react';
-import WalletPageSetup from './pages/wallet/WalletPageSetup';
+import Header from "./components/Header";
+import RouteConstants from "./constants/RouteConstants";
+import ForgotPasswordScreen from "./pages/ForgotPasswordScreen";
+import LoginScreen from "./pages/LoginScreen";
+import NotFoundScreen from "./pages/NotFoundScreen";
+import ProductsScreen from "./pages/ProductsScreen";
+import RedirectScreen from "./pages/RedirectScreen";
+import RegisterScreen from "./pages/RegisterScreen";
+import UserSettings from "./pages/user-settings";
+import DashboardScreen from "./pages/wallet/DashboardScreen";
+import TransactionScreen from "./pages/wallet/TransactionScreen";
+import WalletPageSetup from "./pages/wallet/WalletPageSetup";
 
 const App = () => {
   return (

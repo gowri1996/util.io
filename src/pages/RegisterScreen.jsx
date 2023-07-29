@@ -6,23 +6,23 @@ import {
   Input,
   Link,
   useToast,
-} from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { Helmet } from "react-helmet";
+import { useDispatch } from "react-redux";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
-import AppUtils from '../utils/AppUtils';
-import Card from '../components/card/Card';
-import { Helmet } from 'react-helmet';
-import RouteConstants from '../constants/RouteConstants';
-import { register } from '../app/slices/userSlice';
-import { useDispatch } from 'react-redux';
+import { register } from "../app/slices/userSlice";
+import Card from "../components/card/Card";
+import RouteConstants from "../constants/RouteConstants";
+import AppUtils from "../utils/AppUtils";
 
-const RegisterScreen = (props) => {
+const RegisterScreen = () => {
   const [formValues, setFormValues] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
   });
   const [loading, setLoading] = useState(false);
 
@@ -45,21 +45,21 @@ const RegisterScreen = (props) => {
           lastName: formValues.lastName,
           email: formValues.email,
           password: formValues.password,
-        })
+        }),
       ).unwrap();
       toast(
         AppUtils.successToastMessage({
-          title: 'Registration success',
-          description: 'Login using the credentials',
-        })
+          title: "Registration success",
+          description: "Login using the credentials",
+        }),
       );
       navigate(RouteConstants.LOGIN, { replace: true });
     } catch (error) {
       toast(
         AppUtils.errorToastMessage({
-          title: 'Registration failed',
+          title: "Registration failed",
           description: error.message,
-        })
+        }),
       );
       setLoading(false);
     }
@@ -71,14 +71,14 @@ const RegisterScreen = (props) => {
         <title>Util.io | Register</title>
       </Helmet>
       <Box
-        style={{ margin: 'auto' }}
+        style={{ margin: "auto" }}
         width={{
-          xs: '95%',
-          sm: '70%',
-          md: '50%',
-          lg: '40%',
-          xl: '40%',
-          '2xl': '35%',
+          xs: "95%",
+          sm: "70%",
+          md: "50%",
+          lg: "40%",
+          xl: "40%",
+          "2xl": "35%",
         }}
       >
         <Card p={4}>
@@ -93,7 +93,7 @@ const RegisterScreen = (props) => {
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
-                      evt.currentTarget.value
+                      evt.currentTarget.value,
                     )
                   }
                 />
@@ -106,7 +106,7 @@ const RegisterScreen = (props) => {
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
-                      evt.currentTarget.value
+                      evt.currentTarget.value,
                     )
                   }
                 />
@@ -120,7 +120,7 @@ const RegisterScreen = (props) => {
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
-                      evt.currentTarget.value
+                      evt.currentTarget.value,
                     )
                   }
                 />
@@ -134,7 +134,7 @@ const RegisterScreen = (props) => {
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
-                      evt.currentTarget.value
+                      evt.currentTarget.value,
                     )
                   }
                 />

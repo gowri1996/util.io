@@ -1,7 +1,6 @@
-import { Box, Center, SimpleGrid } from '@chakra-ui/react';
-
-import React from 'react';
-import isEmpty from 'lodash.isempty';
+import { Box, Center, SimpleGrid } from "@chakra-ui/react";
+import isEmpty from "lodash.isempty";
+import React from "react";
 
 const CardFooter = ({ actions, ...rest }) => {
   return !isEmpty(actions) ? (

@@ -9,9 +9,7 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
-} from '@chakra-ui/react';
-
-import React from 'react';
+} from "@chakra-ui/react";
 
 const DeleteTransactionModal = (props) => {
   const { visible, loading, onClose, deleteTransaction } = props;

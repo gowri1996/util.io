@@ -4,16 +4,16 @@ import {
   Input,
   useColorModeValue,
   useToast,
-} from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
-import { getUser, updateUser } from '../../app/slices/userSlice';
-import { useDispatch, useSelector } from 'react-redux';
+} from "@chakra-ui/react";
+import isEmpty from "lodash.isempty";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import AppUtils from '../../utils/AppUtils';
-import Card from '../../components/card/Card';
-import isEmpty from 'lodash.isempty';
+import { getUser, updateUser } from "../../app/slices/userSlice";
+import Card from "../../components/card/Card";
+import AppUtils from "../../utils/AppUtils";
 
-const AdditionalUserInformationSettings = (props) => {
+const AdditionalUserInformationSettings = () => {
   const user = useSelector(getUser);
   const toast = useToast();
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const AdditionalUserInformationSettings = (props) => {
     currency: user.currency,
   });
 
-  const inputBf = useColorModeValue('#FFFFFF', '#0E1E25');
+  const inputBf = useColorModeValue("#FFFFFF", "#0E1E25");
 
   useEffect(() => {
     setFormValues({
@@ -36,8 +36,8 @@ const AdditionalUserInformationSettings = (props) => {
     if (isEmpty(formValues.currency)) {
       toast(
         AppUtils.errorToastMessage({
-          title: 'Provide all details to save',
-        })
+          title: "Provide all details to save",
+        }),
       );
     } else {
       setLoading(true);
@@ -45,16 +45,16 @@ const AdditionalUserInformationSettings = (props) => {
         await dispatch(updateUser(formValues)).unwrap();
         toast(
           AppUtils.successToastMessage({
-            title: 'User updated successfully',
-          })
+            title: "User updated successfully",
+          }),
         );
         setEditMode(false);
       } catch (error) {
         toast(
           AppUtils.errorToastMessage({
-            title: 'User could not be updated',
+            title: "User could not be updated",
             description: error.message,
-          })
+          }),
         );
       } finally {
         setLoading(false);
@@ -63,7 +63,7 @@ const AdditionalUserInformationSettings = (props) => {
   };
 
   return (
-    <Card p={4} width={'full'}>
+    <Card p={4} width={"full"}>
       <Card.Header title="Additional Information" />
       <Card.Content p={4}>
         <Card.Property
@@ -94,7 +94,7 @@ const AdditionalUserInformationSettings = (props) => {
         ) : (
           <Box mt={5} textAlign="left">
             <Button
-              variant={'danger'}
+              variant={"danger"}
               mr={5}
               onClick={() => {
                 setEditMode(false);

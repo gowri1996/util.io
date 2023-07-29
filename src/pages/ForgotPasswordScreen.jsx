@@ -5,22 +5,22 @@ import {
   FormLabel,
   Input,
   useToast,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { Helmet } from "react-helmet";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import AppUtils from '../utils/AppUtils';
-import Card from '../components/card/Card';
-import { Helmet } from 'react-helmet';
-import RouteConstants from '../constants/RouteConstants';
-import { forgotPassword } from '../app/slices/userSlice';
-import unsecureComponent from '../components/UnsecureComponent';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { forgotPassword } from "../app/slices/userSlice";
+import Card from "../components/card/Card";
+import unsecureComponent from "../components/UnsecureComponent";
+import RouteConstants from "../constants/RouteConstants";
+import AppUtils from "../utils/AppUtils";
 
-const ForgotPasswordScreen = (props) => {
+const ForgotPasswordScreen = () => {
   const [formValues, setFormValues] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [loading, setLoading] = useState(false);
 
@@ -41,21 +41,21 @@ const ForgotPasswordScreen = (props) => {
         forgotPassword({
           email: formValues.email,
           password: formValues.password,
-        })
+        }),
       ).unwrap();
       toast(
         AppUtils.successToastMessage({
-          title: 'Reset password success',
-          description: 'Login using the credentials',
-        })
+          title: "Reset password success",
+          description: "Login using the credentials",
+        }),
       );
       navigate(RouteConstants.LOGIN, { replace: true });
     } catch (error) {
       toast(
         AppUtils.errorToastMessage({
-          title: 'Reset password failed',
+          title: "Reset password failed",
           description: error.message,
-        })
+        }),
       );
       setLoading(false);
     }
@@ -67,14 +67,14 @@ const ForgotPasswordScreen = (props) => {
         <title>Util.io | Forgot Password</title>
       </Helmet>
       <Box
-        style={{ margin: 'auto' }}
+        style={{ margin: "auto" }}
         width={{
-          xs: '95%',
-          sm: '70%',
-          md: '50%',
-          lg: '40%',
-          xl: '40%',
-          '2xl': '35%',
+          xs: "95%",
+          sm: "70%",
+          md: "50%",
+          lg: "40%",
+          xl: "40%",
+          "2xl": "35%",
         }}
       >
         <Card p={4}>
@@ -90,7 +90,7 @@ const ForgotPasswordScreen = (props) => {
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
-                      evt.currentTarget.value
+                      evt.currentTarget.value,
                     )
                   }
                 />
@@ -104,7 +104,7 @@ const ForgotPasswordScreen = (props) => {
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
-                      evt.currentTarget.value
+                      evt.currentTarget.value,
                     )
                   }
                 />

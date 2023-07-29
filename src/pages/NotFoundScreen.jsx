@@ -1,7 +1,7 @@
-import { Box, Center, HStack, Spacer, Text } from '@chakra-ui/react';
+import { Box, Center, HStack, Spacer, Text } from "@chakra-ui/react";
+import { Helmet } from "react-helmet";
 
-import Card from '../components/card/Card';
-import { Helmet } from 'react-helmet';
+import Card from "../components/card/Card";
 
 const NotFoundScreen = () => {
   return (
@@ -9,7 +9,7 @@ const NotFoundScreen = () => {
       <Helmet>
         <title>Util.io | Error</title>
       </Helmet>
-      <Box style={{ marginTop: '25vh' }} width={500} maxWidth={500}>
+      <Box style={{ marginTop: "25vh" }} width={500} maxWidth={500}>
         <Card p={10}>
           <Card.Content>
             <Center>

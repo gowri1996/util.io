@@ -1,13 +1,14 @@
-import breakpoints from './breakpoint';
-import button from './components/button';
-import { extendTheme } from '@chakra-ui/react';
-import { global } from './styles';
-import input from './components/input';
-import link from './components/link';
-import modal from './components/modal';
-import select from './components/select';
-import spinner from './components/spinner';
-import textarea from './components/textarea';
+import { extendTheme } from "@chakra-ui/react";
+
+import breakpoints from "./breakpoint";
+import button from "./components/button";
+import input from "./components/input";
+import link from "./components/link";
+import modal from "./components/modal";
+import select from "./components/select";
+import spinner from "./components/spinner";
+import textarea from "./components/textarea";
+import { global } from "./styles";
 
 export default extendTheme({
   breakpoints,
@@ -24,5 +25,5 @@ export default extendTheme({
     Textarea: textarea,
     Select: select,
   },
-  config: { useSystemColorMode: false, initialColorMode: 'light' },
+  config: { useSystemColorMode: false, initialColorMode: "light" },
 });

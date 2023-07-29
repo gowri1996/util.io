@@ -1,8 +1,8 @@
-import LiveService from './live/LiveService';
-import MockService from './mock/MockService';
+import LiveService from "./live/LiveService";
+import MockService from "./mock/MockService";
 
 const service =
-  process.env.REACT_APP_USE_LIVE_SERVICE === 'true' ? LiveService : MockService;
+  process.env.REACT_APP_USE_LIVE_SERVICE === "true" ? LiveService : MockService;
 
 const constructSuccessResponse = (result) => {
   return result;

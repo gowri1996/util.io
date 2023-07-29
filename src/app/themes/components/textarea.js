@@ -1,22 +1,22 @@
-import { mode } from '@chakra-ui/theme-tools';
+import { mode } from "@chakra-ui/theme-tools";
 
 const textarea = {
   baseStyle: (props) => {
     return {
-      bg: 'transparent',
+      bg: "transparent",
       borderWidth: 2,
-      borderStyle: 'solid',
+      borderStyle: "solid",
       _active: {
         zIndex: 1,
-        borderColor: mode('#339933', '#0BCBBB')(props),
+        borderColor: mode("#339933", "#0BCBBB")(props),
       },
       _hover: {
         zIndex: 1,
-        borderColor: mode('#339933', '#0BCBBB')(props),
+        borderColor: mode("#339933", "#0BCBBB")(props),
       },
       _focus: {
         zIndex: 1,
-        borderColor: mode('#339933', '#0BCBBB')(props),
+        borderColor: mode("#339933", "#0BCBBB")(props),
       },
     };
   },

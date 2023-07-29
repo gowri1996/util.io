@@ -1,24 +1,24 @@
+import isEmpty from "lodash.isempty";
+import { useEffect } from "react";
+import cookies from "react-cookies";
+import { useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { getUserFromToken, refreshTokens } from "../app/slices/userSlice";
+import PageLoader from "../components/PageLoader";
+import Constants from "../constants/Constants";
+import RouteConstants from "../constants/RouteConstants";
 import {
   deleteToken,
   getUserDataFromCookie,
   isAuthenticatedUser,
-} from '../utils/AuthUtils';
+} from "../utils/AuthUtils";
 import {
   getAllParamsAsStringFromUrl,
   getParamsFromUrl,
-} from '../utils/UrlUtils';
-import { getUserFromToken, refreshTokens } from '../app/slices/userSlice';
-import { useLocation, useNavigate } from 'react-router-dom';
+} from "../utils/UrlUtils";
 
-import Constants from '../constants/Constants';
-import PageLoader from '../components/PageLoader';
-import RouteConstants from '../constants/RouteConstants';
-import cookies from 'react-cookies';
-import isEmpty from 'lodash.isempty';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-
-const RedirectScreen = (props) => {
+const RedirectScreen = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const RedirectScreen = (props) => {
         if (error.status === 401) {
           try {
             const response = await dispatch(
-              refreshTokens(savedRefreshToken)
+              refreshTokens(savedRefreshToken),
             ).unwrap();
             cookies.save(Constants.COOKIE_TOKEN, response.data.token, {
               path: RouteConstants.BASE,
@@ -50,7 +50,7 @@ const RedirectScreen = (props) => {
               {
                 path: RouteConstants.BASE,
                 expires,
-              }
+              },
             );
             navigate(successRedirectionUrl, { replace: true });
           } catch (error) {
@@ -67,30 +67,30 @@ const RedirectScreen = (props) => {
 
     const securityParam = getParamsFromUrl(
       location.search,
-      Constants.SECURE_KEYWORD
+      Constants.SECURE_KEYWORD,
     );
     const redirect = getParamsFromUrl(
       location.search,
-      Constants.REDIRECT_KEYWORD
+      Constants.REDIRECT_KEYWORD,
     );
     const otherParams = getAllParamsAsStringFromUrl(location.search, [
       Constants.REDIRECT_KEYWORD,
       Constants.SECURE_KEYWORD,
     ]);
-    const redirectUrl = redirect ? redirect + otherParams : '';
+    const redirectUrl = redirect ? redirect + otherParams : "";
 
     if (securityParam === Constants.UN_SECURE_VALUE) {
       // Unsecure Component
       if (isAuthenticatedUser()) {
         redirectUser(
           RouteConstants.PRODUCTS,
-          redirectUrl ? redirectUrl : RouteConstants.BASE
+          redirectUrl ? redirectUrl : RouteConstants.BASE,
         );
       } else {
         if (!isEmpty(getUserDataFromCookie())) {
           redirectUser(
             RouteConstants.PRODUCTS,
-            redirectUrl ? redirectUrl : RouteConstants.BASE
+            redirectUrl ? redirectUrl : RouteConstants.BASE,
           );
         } else {
           deleteToken();
@@ -103,14 +103,14 @@ const RedirectScreen = (props) => {
       // Secure Component
       redirectUser(
         redirectUrl ? redirectUrl : RouteConstants.PRODUCTS,
-        RouteConstants.BASE
+        RouteConstants.BASE,
       );
     } else {
       // After login step
       const token = getParamsFromUrl(location.search, Constants.COOKIE_TOKEN);
       const refreshToken = getParamsFromUrl(
         location.search,
-        Constants.COOKIE_REFRESH_TOKEN
+        Constants.COOKIE_REFRESH_TOKEN,
       );
       if (!isEmpty(token) && !isEmpty(refreshToken)) {
         cookies.save(Constants.COOKIE_TOKEN, token, {

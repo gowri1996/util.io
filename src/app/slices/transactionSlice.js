@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import Service from '../../api/Service';
+import Service from "../../api/Service";
 
 export const deleteTransaction = createAsyncThunk(
-  'transaction/delete',
+  "transaction/delete",
   async (transactionId, { getState, rejectWithValue }) => {
     try {
       const user = getState().user;
@@ -15,11 +15,11 @@ export const deleteTransaction = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const createTransaction = createAsyncThunk(
-  'transaction/create',
+  "transaction/create",
   async (transaction, { getState, rejectWithValue }) => {
     try {
       const user = getState().user;
@@ -32,11 +32,11 @@ export const createTransaction = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const updateTransaction = createAsyncThunk(
-  'transaction/update',
+  "transaction/update",
   async (request, { getState, rejectWithValue }) => {
     try {
       const user = getState().user;
@@ -49,11 +49,11 @@ export const updateTransaction = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const fetchTransactions = createAsyncThunk(
-  'transaction/fetch',
+  "transaction/fetch",
   async (_, { getState, rejectWithValue }) => {
     try {
       const user = getState().user;
@@ -68,17 +68,17 @@ export const fetchTransactions = createAsyncThunk(
       const transaction = getState().transaction;
       if (transaction.fetched) return false;
     },
-  }
+  },
 );
 
 const transactionSlice = createSlice({
-  name: 'transaction',
+  name: "transaction",
   initialState: {
     fetched: false,
     transactions: [],
   },
   reducers: {
-    resetTransaction: (state, action) => {
+    resetTransaction: (state) => {
       state.fetched = false;
       state.transactions = [];
     },
@@ -88,9 +88,9 @@ const transactionSlice = createSlice({
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.transactions.splice(
           state.transactions.findIndex(
-            (transaction) => transaction._id === action.payload.data._id
+            (transaction) => transaction._id === action.payload.data._id,
           ),
-          1
+          1,
         );
       })
       .addCase(createTransaction.fulfilled, (state, action) => {
@@ -99,7 +99,7 @@ const transactionSlice = createSlice({
       .addCase(updateTransaction.fulfilled, (state, action) => {
         const data = action.payload.data;
         const transaction = state.transactions.find(
-          (transaction) => transaction._id === data._id
+          (transaction) => transaction._id === data._id,
         );
         Object.entries(data).forEach(([key, value]) => {
           transaction[key] = value;
@@ -111,7 +111,7 @@ const transactionSlice = createSlice({
         state.transactions.splice(
           0,
           state.transactions.length,
-          ...transactions
+          ...transactions,
         );
       });
   },

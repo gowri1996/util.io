@@ -1,14 +1,14 @@
-import { Box, Link, Text } from '@chakra-ui/react';
-import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { Box, Link, Text } from "@chakra-ui/react";
+import isEmpty from "lodash.isempty";
+import { useEffect } from "react";
+import cookies from "react-cookies";
+import { useSelector } from "react-redux";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 
-import Constants from '../constants/Constants';
-import RouteConstants from '../constants/RouteConstants';
-import cookies from 'react-cookies';
-import { getUser } from '../app/slices/userSlice';
-import { isAuthenticatedUser } from '../utils/AuthUtils';
-import isEmpty from 'lodash.isempty';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { getUser } from "../app/slices/userSlice";
+import Constants from "../constants/Constants";
+import RouteConstants from "../constants/RouteConstants";
+import { isAuthenticatedUser } from "../utils/AuthUtils";
 
 const secureComponent = (Page) => {
   return (props) => {
@@ -22,7 +22,7 @@ const secureComponent = (Page) => {
       if (!isEmpty(token) && (isEmpty(user._id) || !isTokenValid)) {
         let route = `${RouteConstants.REDIRECT}?${Constants.SECURE_KEYWORD}=${Constants.SECURE_VALUE}`; // construct secure component value
         route += `&${Constants.REDIRECT_KEYWORD}=${location.pathname}`; // construct redirect pathname
-        route += location.search ? '&' + location.search.slice(1) : ''; // add query params to url. slice to remove '?' character
+        route += location.search ? "&" + location.search.slice(1) : ""; // add query params to url. slice to remove '?' character
         navigate(route, { replace: true });
       }
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -31,9 +31,9 @@ const secureComponent = (Page) => {
       return (
         <Box>
           <Text>
-            You're not logged in to the system. Try to
+            {`You're not logged in to the system. Try to`}
             <Link as={RouterLink} to={RouteConstants.LOGIN}>
-              {' Login'}
+              {" Login"}
             </Link>
           </Text>
         </Box>

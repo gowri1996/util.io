@@ -7,23 +7,23 @@ import {
   Input,
   Link,
   useToast,
-} from '@chakra-ui/react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { Helmet } from "react-helmet";
+import { useDispatch } from "react-redux";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
-import AppUtils from '../utils/AppUtils';
-import Card from '../components/card/Card';
-import { Helmet } from 'react-helmet';
-import RouteConstants from '../constants/RouteConstants';
-import { addQueryParamsToUrl } from '../utils/UrlUtils';
-import { login } from '../app/slices/userSlice';
-import unsecureComponent from '../components/UnsecureComponent';
-import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { login } from "../app/slices/userSlice";
+import Card from "../components/card/Card";
+import unsecureComponent from "../components/UnsecureComponent";
+import RouteConstants from "../constants/RouteConstants";
+import AppUtils from "../utils/AppUtils";
+import { addQueryParamsToUrl } from "../utils/UrlUtils";
 
-const LoginScreen = (props) => {
+const LoginScreen = () => {
   const [formValues, setFormValues] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [loading, setLoading] = useState(false);
 
@@ -44,7 +44,7 @@ const LoginScreen = (props) => {
         login({
           email: formValues.email,
           password: formValues.password,
-        })
+        }),
       ).unwrap();
       const url = addQueryParamsToUrl(RouteConstants.REDIRECT, {
         token: response.data.token,
@@ -54,9 +54,9 @@ const LoginScreen = (props) => {
     } catch (error) {
       toast(
         AppUtils.errorToastMessage({
-          title: 'Login failed',
+          title: "Login failed",
           description: error.message,
-        })
+        }),
       );
       setLoading(false);
     }
@@ -68,14 +68,14 @@ const LoginScreen = (props) => {
         <title>Util.io | Login</title>
       </Helmet>
       <Box
-        style={{ margin: 'auto' }}
+        style={{ margin: "auto" }}
         width={{
-          xs: '95%',
-          sm: '70%',
-          md: '50%',
-          lg: '40%',
-          xl: '40%',
-          '2xl': '35%',
+          xs: "95%",
+          sm: "70%",
+          md: "50%",
+          lg: "40%",
+          xl: "40%",
+          "2xl": "35%",
         }}
       >
         <Card p={4}>
@@ -91,7 +91,7 @@ const LoginScreen = (props) => {
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
-                      evt.currentTarget.value
+                      evt.currentTarget.value,
                     )
                   }
                 />
@@ -105,14 +105,14 @@ const LoginScreen = (props) => {
                   onChange={(evt) =>
                     handleFormInputChange(
                       evt.currentTarget.name,
-                      evt.currentTarget.value
+                      evt.currentTarget.value,
                     )
                   }
                 />
               </FormControl>
               <HStack pt={5} fontSize={15} justifyContent="space-between">
                 <Link as={RouterLink} to={RouteConstants.REGISTER}>
-                  Don't have an account?
+                  {`Don't have an account?`}
                 </Link>
                 <Link as={RouterLink} to={RouteConstants.FORGOT_PASSWORD}>
                   Forgot password

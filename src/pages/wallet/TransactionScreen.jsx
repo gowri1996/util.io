@@ -1,3 +1,4 @@
+import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import {
   Box,
   Center,
@@ -14,26 +15,25 @@ import {
   chakra,
   useColorModeValue,
   useToast,
-} from '@chakra-ui/react';
-import { FaEdit, FaPlus, FaRegWindowClose } from 'react-icons/fa';
-import React, { useState } from 'react';
-import { TriangleDownIcon, TriangleUpIcon } from '@chakra-ui/icons';
+} from "@chakra-ui/react";
+import React, { useState } from "react";
+import { FaEdit, FaPlus, FaRegWindowClose } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { useSortBy, useTable } from "react-table";
+
+import CreateUpdateTransactionModal from "./transactionScreen/CreateUpdateTransactionModal";
+import DeleteTransactionModal from "./transactionScreen/DeleteTransactionModal";
 import {
   createTransaction,
   deleteTransaction,
   getAllTransactions,
   updateTransaction,
-} from '../../app/slices/transactionSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { useSortBy, useTable } from 'react-table';
+} from "../../app/slices/transactionSlice";
+import { getUser } from "../../app/slices/userSlice";
+import Card from "../../components/card/Card";
+import AppUtils from "../../utils/AppUtils";
 
-import AppUtils from '../../utils/AppUtils';
-import Card from '../../components/card/Card';
-import CreateUpdateTransactionModal from './transactionScreen/CreateUpdateTransactionModal';
-import DeleteTransactionModal from './transactionScreen/DeleteTransactionModal';
-import { getUser } from '../../app/slices/userSlice';
-
-const TransactionScreen = (props) => {
+const TransactionScreen = () => {
   const [loading, setLoading] = useState(false);
   const [action, setAction] = useState(null);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
@@ -46,8 +46,8 @@ const TransactionScreen = (props) => {
   const onSubmit = (transaction) => {
     if (transaction.amount <= 0) {
       AppUtils.errorToastMessage({
-        title: 'Amount value is invalid',
-        description: 'Amount must be greater than zero',
+        title: "Amount value is invalid",
+        description: "Amount must be greater than zero",
       });
       return;
     }
@@ -65,15 +65,15 @@ const TransactionScreen = (props) => {
       setAction(null);
       toast(
         AppUtils.successToastMessage({
-          title: 'Transaction created',
-        })
+          title: "Transaction created",
+        }),
       );
     } catch (error) {
       toast(
         AppUtils.errorToastMessage({
-          title: 'Transaction cannot be added',
+          title: "Transaction cannot be added",
           description: error.message,
-        })
+        }),
       );
     } finally {
       setLoading(false);
@@ -84,21 +84,21 @@ const TransactionScreen = (props) => {
     setLoading(true);
     try {
       await dispatch(
-        updateTransaction({ transactionId, transaction })
+        updateTransaction({ transactionId, transaction }),
       ).unwrap();
       setSelectedTransaction(null);
       setAction(null);
       toast(
         AppUtils.successToastMessage({
-          title: 'Transaction updated',
-        })
+          title: "Transaction updated",
+        }),
       );
     } catch (error) {
       toast(
         AppUtils.errorToastMessage({
-          title: 'Transaction cannot be updated',
+          title: "Transaction cannot be updated",
           description: error.message,
-        })
+        }),
       );
     } finally {
       setLoading(false);
@@ -113,15 +113,15 @@ const TransactionScreen = (props) => {
       setAction(null);
       toast(
         AppUtils.successToastMessage({
-          title: 'Transaction deleted',
-        })
+          title: "Transaction deleted",
+        }),
       );
     } catch (error) {
       toast(
         AppUtils.errorToastMessage({
-          title: 'Transaction cannot be deleted',
+          title: "Transaction cannot be deleted",
           description: error.message,
-        })
+        }),
       );
     } finally {
       setLoading(false);
@@ -130,67 +130,67 @@ const TransactionScreen = (props) => {
 
   const setupUpdate = (transaction) => {
     setSelectedTransaction(transaction);
-    setAction('edit');
+    setAction("edit");
   };
 
   const setupDelete = (transaction) => {
     setSelectedTransaction(transaction);
-    setAction('delete');
+    setAction("delete");
   };
 
   const columns = React.useMemo(
     () => [
       {
-        Header: 'Name',
-        accessor: 'name',
+        Header: "Name",
+        accessor: "name",
       },
       {
-        Header: 'Amount',
+        Header: "Amount",
         accessor: (row) => {
-          return `${user.currency ? user.currency : ''} ${row.amount}`;
+          return `${user.currency ? user.currency : ""} ${row.amount}`;
         },
         Cell: (data) => {
           const row = data.row.original;
-          const color = row.type === 'gain' ? 'green' : 'red';
+          const color = row.type === "gain" ? "green" : "red";
           return <Text color={color}>{data.value}</Text>;
         },
-        id: 'amountFormatted',
+        id: "amountFormatted",
       },
       {
-        Header: 'Category',
-        accessor: 'category',
+        Header: "Category",
+        accessor: "category",
       },
       {
-        Header: 'Description',
-        accessor: 'description',
+        Header: "Description",
+        accessor: "description",
       },
       {
-        Header: 'Created At',
-        accessor: 'createdAt',
+        Header: "Created At",
+        accessor: "createdAt",
         Cell: (data) => {
           const row = data.row.original;
           const createdAt =
             new Date(row.createdAt).toLocaleDateString() +
-            ' ' +
+            " " +
             new Date(row.createdAt).toLocaleTimeString();
           return <Text>{createdAt}</Text>;
         },
       },
       {
-        Header: 'Updated At',
-        accessor: 'updatedAt',
+        Header: "Updated At",
+        accessor: "updatedAt",
         disableSortBy: true,
         Cell: (data) => {
           const row = data.row.original;
           const updatedAt =
             new Date(row.updatedAt).toLocaleDateString() +
-            ' ' +
+            " " +
             new Date(row.updatedAt).toLocaleTimeString();
           return <Text>{updatedAt}</Text>;
         },
       },
       {
-        Header: 'Actions',
+        Header: "Actions",
         Cell: (data) => {
           const row = data.row.original;
           return (
@@ -224,11 +224,11 @@ const TransactionScreen = (props) => {
         },
       },
     ],
-    [user]
+    [user],
   );
 
-  const tableBorderColor = useColorModeValue('#FFFFFF', '#000000');
-  const tableColor = useColorModeValue('#FFFFFF', '#141414');
+  const tableBorderColor = useColorModeValue("#FFFFFF", "#000000");
+  const tableColor = useColorModeValue("#FFFFFF", "#141414");
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data: transactions }, useSortBy);
@@ -238,12 +238,12 @@ const TransactionScreen = (props) => {
       <Box>
         <Tooltip label="Add Transaction" placement="left" fontSize="sm">
           <IconButton
-            variant={'icon'}
+            variant={"icon"}
             size="md"
             icon={<FaPlus />}
             aria-label="add-transaction-icon"
             onClick={() => {
-              setAction('add');
+              setAction("add");
             }}
           />
         </Tooltip>
@@ -252,34 +252,39 @@ const TransactionScreen = (props) => {
         <Box
           p={3}
           mt={5}
-          border={'solid'}
+          border={"solid"}
           borderRadius={8}
           borderWidth={1}
           borderColor={tableBorderColor}
           zIndex={1}
-          boxShadow={'sm'}
+          boxShadow={"sm"}
           display="block"
-          maxW={'full'}
-          overflowX={'auto'}
-          overflowY={'auto'}
+          maxW={"full"}
+          overflowX={"auto"}
+          overflowY={"auto"}
           bg={tableColor}
         >
           <Table
             {...getTableProps()}
             size="sm"
-            variant={'unstyled'}
-            width={'full'}
+            variant={"unstyled"}
+            width={"full"}
           >
             <Thead>
               {headerGroups.map((headerGroup) => (
-                <Tr {...headerGroup.getHeaderGroupProps()} m={4}>
+                <Tr
+                  key={headerGroup.id}
+                  {...headerGroup.getHeaderGroupProps()}
+                  m={4}
+                >
                   {headerGroup.headers.map((column) => (
                     <Th
+                      key={column.id}
                       {...column.getHeaderProps(column.getSortByToggleProps())}
                       isNumeric={column.isNumeric}
                     >
                       <Flex>
-                        {column.render('Header')}
+                        {column.render("Header")}
                         <chakra.span ml="4">
                           {column.isSorted ? (
                             column.isSortedDesc ? (
@@ -299,13 +304,14 @@ const TransactionScreen = (props) => {
               {rows.map((row) => {
                 prepareRow(row);
                 return (
-                  <Tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => (
+                  <Tr key={row.id} {...row.getRowProps()}>
+                    {row.cells.map((cell, index) => (
                       <Td
+                        key={index}
                         {...cell.getCellProps()}
                         isNumeric={cell.column.isNumeric}
                       >
-                        {cell.render('Cell')}
+                        {cell.render("Cell")}
                       </Td>
                     ))}
                   </Tr>
@@ -319,9 +325,9 @@ const TransactionScreen = (props) => {
           mt="15vh"
           mx="auto"
           width={{
-            xs: '70%',
-            sm: '70%',
-            md: '50%',
+            xs: "70%",
+            sm: "70%",
+            md: "50%",
           }}
         >
           <Card p={7}>
@@ -337,7 +343,7 @@ const TransactionScreen = (props) => {
         </Box>
       )}
       <CreateUpdateTransactionModal
-        visible={action === 'add' || action === 'edit'}
+        visible={action === "add" || action === "edit"}
         data={selectedTransaction}
         loading={loading}
         handleSubmit={onSubmit}
@@ -347,7 +353,7 @@ const TransactionScreen = (props) => {
         }}
       />
       <DeleteTransactionModal
-        visible={action === 'delete'}
+        visible={action === "delete"}
         loading={loading}
         deleteTransaction={onDeleteTransaction}
         onClose={() => {

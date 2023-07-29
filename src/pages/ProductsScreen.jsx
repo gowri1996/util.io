@@ -4,16 +4,15 @@ import {
   IconButton,
   Text,
   useColorModeValue,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
+import { Helmet } from "react-helmet";
+import { FaCoins } from "react-icons/fa";
+import { Link as RouterLink } from "react-router-dom";
 
-import { FaCoins } from 'react-icons/fa';
-import { Helmet } from 'react-helmet';
-import React from 'react';
-import RouteConstants from '../constants/RouteConstants';
-import { Link as RouterLink } from 'react-router-dom';
-import secureComponent from '../components/SecureComponent';
+import secureComponent from "../components/SecureComponent";
+import RouteConstants from "../constants/RouteConstants";
 
-const ProductsScreen = (props) => {
+const ProductsScreen = () => {
   return (
     <>
       <Helmet>
@@ -22,33 +21,33 @@ const ProductsScreen = (props) => {
       <Flex
         width="full"
         height="full"
-        justifyContent={'center'}
+        justifyContent={"center"}
         style={{ marginTop: 0 }}
       >
         <Flex
           mt={50}
-          height={'50%'}
-          width={'50%'}
-          bg={useColorModeValue('#FFFFFF', '#141414')}
-          border={useColorModeValue('#FFFFFF', '#141414')}
+          height={"50%"}
+          width={"50%"}
+          bg={useColorModeValue("#FFFFFF", "#141414")}
+          border={useColorModeValue("#FFFFFF", "#141414")}
           borderRadius={20}
-          borderStyle={'solid'}
-          justifyContent={'center'}
-          alignItems={'center'}
-          boxShadow={'lg'}
+          borderStyle={"solid"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          boxShadow={"lg"}
           gap={10}
         >
           {[
             <Flex
               key={RouteConstants.WALLET_BASE}
-              flexDirection={'column'}
-              alignItems={'center'}
-              justifyContent={'center'}
+              flexDirection={"column"}
+              alignItems={"center"}
+              justifyContent={"center"}
               p={4}
-              border={useColorModeValue('#FFFFFF', '#141414')}
+              border={useColorModeValue("#FFFFFF", "#141414")}
               borderRadius={20}
-              borderStyle={'solid'}
-              boxShadow={'lg'}
+              borderStyle={"solid"}
+              boxShadow={"lg"}
               as={RouterLink}
               to={RouteConstants.WALLET_BASE}
             >

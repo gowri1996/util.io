@@ -1,8 +1,6 @@
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading } from "@chakra-ui/react";
 
-import React from 'react';
-
-const DashboardScreen = (props) => {
+const DashboardScreen = () => {
   return (
     <Box>
       <Heading fontWeight={300} letterSpacing={0.5}>

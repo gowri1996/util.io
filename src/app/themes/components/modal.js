@@ -1,16 +1,16 @@
-import { mode } from '@chakra-ui/theme-tools';
+import { mode } from "@chakra-ui/theme-tools";
 
 const modal = {
   baseStyle: (props) => {
-    const bg = mode('#FCFCFC', '#181818')(props);
+    const bg = mode("#FCFCFC", "#181818")(props);
     return {
       dialog: {
         bg,
-        borderRadius: 'md',
-        zIndex: 'modal',
+        borderRadius: "md",
+        zIndex: "modal",
         width: {
-          xs: '85%',
-          sm: '100%',
+          xs: "85%",
+          sm: "100%",
         },
       },
       closeButton: {
@@ -20,7 +20,7 @@ const modal = {
         _focus: {
           borderColor: bg,
         },
-        color: 'red',
+        color: "red",
       },
     };
   },
