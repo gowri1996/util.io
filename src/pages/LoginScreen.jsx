@@ -112,7 +112,7 @@ const LoginScreen = () => {
               </FormControl>
               <HStack pt={5} fontSize={15} justifyContent="space-between">
                 <Link as={RouterLink} to={RouteConstants.REGISTER}>
-                  {`Don't have an account?`}
+                  {`Don't have an account ?`}
                 </Link>
                 <Link as={RouterLink} to={RouteConstants.FORGOT_PASSWORD}>
                   Forgot password
